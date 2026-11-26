@@ -7,7 +7,7 @@ import { getProducts, getSettings } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Products",
-  description: "Brightera Source-to-Pay and Brightera MRP: procurement and planning platforms for growing manufacturers and distributors.",
+  description: "Brightseid Source-to-Pay and Brightseid MRP: procurement and planning platforms for growing manufacturers and distributors.",
   alternates: { canonical: "/products" },
 };
 

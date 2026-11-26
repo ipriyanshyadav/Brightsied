@@ -31,7 +31,7 @@ export function Capabilities({ services, eyebrow = "What we do", withIntro = tru
         <div className="panel-3d rounded-[28px] p-3 text-white sm:p-4">
           <div className="flex items-center justify-between px-2 pb-3 pt-1">
             <span className="panel-cell rounded-lg px-3 py-1.5 font-mono text-xs text-white/60">
-              Brightera <span className="mx-1.5 text-white/25">|</span> Services
+              Brightseid <span className="mx-1.5 text-white/25">|</span> Services
             </span>
             <span className="font-mono text-xs text-white/35">{services.length} practices</span>
           </div>

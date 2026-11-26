@@ -1,6 +1,6 @@
 import type { Testimonial, WorkItem } from "@/lib/content/types";
 
-// Only Brightera's own work belongs here. Client case studies are added with kind "client"
+// Only Brightseid's own work belongs here. Client case studies are added with kind "client"
 // and a caseStudy once the client has agreed to be named (or to an anonymised write-up).
 export const work: WorkItem[] = [
   {
@@ -8,7 +8,7 @@ export const work: WorkItem[] = [
     kind: "product",
     tab: "Source-to-Pay",
     title: "A procurement suite from purchase request to paid invoice",
-    where: "Brightera product",
+    where: "Brightseid product",
     body: "More than 22 modules covering requisitions, sealed-bid RFQs, comparative statements, purchase orders, contracts and three-way invoice matching, with maker-checker approval and an immutable audit trail throughout.",
     points: [
       "Approval rules engine driven by amount, category and cost centre",
@@ -38,7 +38,7 @@ export const work: WorkItem[] = [
       outcome: [
         "More than 22 modules covering the full source-to-pay lifecycle",
         "Event-driven workers on RabbitMQ, traced end to end with Jaeger",
-        "Available today as Brightera Source-to-Pay, with guided demos",
+        "Available today as Brightseid Source-to-Pay, with guided demos",
       ],
       stack: ["FastAPI", "PostgreSQL", "RabbitMQ", "MinIO", "Kong", "Jaeger", "Grafana + Loki", "K3s", "Next.js"],
       product: "s2p",
@@ -49,7 +49,7 @@ export const work: WorkItem[] = [
     kind: "product",
     tab: "MRP",
     title: "A planning platform for discrete manufacturers",
-    where: "Brightera product",
+    where: "Brightseid product",
     body: "Multi-level BOMs, demand and a deterministic Rust planning engine that turns them into pegged purchase and production orders, fed by live change data from the shop floor.",
     points: [
       "FastAPI and SQLAlchemy services with a Rust MRP worker",
@@ -79,7 +79,7 @@ export const work: WorkItem[] = [
       outcome: [
         "Multi-level BOMs with versions, effectivity dates and alternates",
         "Planned purchase and production orders pegged back to demand",
-        "Available today as Brightera MRP, with guided demos",
+        "Available today as Brightseid MRP, with guided demos",
       ],
       stack: ["FastAPI", "SQLAlchemy", "Rust", "Apache Arrow", "PostgreSQL", "Kafka", "Debezium", "Temporal", "Keycloak", "OPA"],
       product: "mrp",
@@ -90,7 +90,7 @@ export const work: WorkItem[] = [
     kind: "lab",
     tab: "Retrieval lab",
     title: "A live retrieval tuner you can play with",
-    where: "Brightera lab",
+    where: "Brightseid lab",
     body: "A small, real retrieval demo: change the chunk size and top-k and watch which passages a RAG system would hand to the model. It's the first thing we tune on every AI build.",
     points: [
       "Chunking and scoring run in the browser",

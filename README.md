@@ -1,6 +1,6 @@
-# Brightera website
+# Brightseid website
 
-The company site for Brightera, a software engineering studio in Gurgaon. It is built with Next.js 16 (App Router, Cache Components), TypeScript, Tailwind CSS v4, GSAP (ScrollTrigger and SplitText), Lenis and React Three Fiber.
+The company site for Brightseid, a software engineering studio in Gurgaon. It is built with Next.js 16 (App Router, Cache Components), TypeScript, Tailwind CSS v4, GSAP (ScrollTrigger and SplitText), Lenis and React Three Fiber.
 
 The original personal portfolio is preserved at the git tag `portfolio-v1`.
 
@@ -33,7 +33,7 @@ Before launch, fill in these values in `content/seed/site.ts`:
 
 - `whatsapp`: digits with country code, e.g. `919876543210`. While empty, WhatsApp links are hidden.
 - `bookingUrl`: a Cal.com or Calendly link. While empty, "Book a call" goes to the brief form.
-- `email`: switch to `hello@brightera.in` once the domain mailbox exists.
+- `email`: switch to `hello@brightseid.in` once the domain mailbox exists.
 - `legal`: entity name, CIN and GSTIN after registration. They appear in the footer only once set.
 - `socials`: LinkedIn and other profiles.
 - Testimonials: add real, approved quotes only. Until then the section is hidden.
@@ -74,9 +74,9 @@ The project brief (`/contact`) and demo requests (`/products/[slug]#demo`) are s
 |---|---|
 | `RESEND_API_KEY` | Resend API key |
 | `LEAD_INBOX_EMAIL` | Where leads are delivered |
-| `LEAD_FROM_EMAIL` | Sender. Use `Brightera <onboarding@resend.dev>` until `brightera.in` is verified in Resend. |
+| `LEAD_FROM_EMAIL` | Sender. Use `Brightseid <onboarding@resend.dev>` until `brightseid.in` is verified in Resend. |
 | `LEAD_SEND_AUTOREPLY` | `true` to email visitors a confirmation (needs a verified domain) |
-| `NEXT_PUBLIC_SITE_URL` | Optional override of the canonical URL (defaults to `https://brightera.in`) |
+| `NEXT_PUBLIC_SITE_URL` | Optional override of the canonical URL (defaults to `https://brightseid.in`) |
 
 The forms reject submissions that fill the hidden honeypot field or arrive less than three seconds after the form loaded. If the keys are missing or Resend fails, visitors see an error with the fallback email address, and the cause is logged on the server.
 
@@ -99,7 +99,7 @@ Every service, product and case study has its own share image, drawn by `lib/og.
 
 ## Deploying
 
-Deploy on Vercel: import the repo, add the env vars above, and set the production domain once `brightera.in` is bought. Then add that domain to Sanity's CORS origins and the webhook URL.
+Deploy on Vercel: import the repo, add the env vars above, and set the production domain once `brightseid.in` is bought. Then add that domain to Sanity's CORS origins and the webhook URL.
 
 ## Accessibility and motion
 

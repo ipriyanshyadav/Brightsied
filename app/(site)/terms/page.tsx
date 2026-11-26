@@ -4,7 +4,7 @@ import { getSettings } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Terms of use",
-  description: "Terms for using the Brightera website.",
+  description: "Terms for using the Brightseid website.",
   alternates: { canonical: "/terms" },
 };
 

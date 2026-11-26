@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { getProduct, getSettings } from "@/lib/content";
 import { OG_SIZE, renderOgCard } from "@/lib/og";
 
-export const alt = "A Brightera product";
+export const alt = "A Brightseid product";
 export const size = OG_SIZE;
 export const contentType = "image/png";
 

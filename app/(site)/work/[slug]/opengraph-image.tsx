@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { getCaseStudy, getSettings } from "@/lib/content";
 import { OG_SIZE, renderOgCard } from "@/lib/og";
 
-export const alt = "A Brightera case study";
+export const alt = "A Brightseid case study";
 export const size = OG_SIZE;
 export const contentType = "image/png";
 

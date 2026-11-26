@@ -8,7 +8,7 @@ import { getHome, getSettings } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "Brightera is a software engineering studio in Gurgaon that builds products, backends and AI systems for startups, growing businesses and agencies.",
+  description: "Brightseid is a software engineering studio in Gurgaon that builds products, backends and AI systems for startups, growing businesses and agencies.",
   alternates: { canonical: "/about" },
 };
 

@@ -7,7 +7,7 @@ import { getSettings, getTestimonials, getWork } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Work",
-  description: "Platforms, products and experiments built by Brightera.",
+  description: "Platforms, products and experiments built by Brightseid.",
   alternates: { canonical: "/work" },
 };
 

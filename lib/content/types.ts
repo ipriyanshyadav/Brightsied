@@ -123,7 +123,7 @@ export type CaseStudy = {
   /** Plain statements of what exists today. No invented metrics. */
   outcome: string[];
   stack: string[];
-  /** Slug of a Brightera product this work became, for the demo call to action. */
+  /** Slug of a Brightseid product this work became, for the demo call to action. */
   product?: string;
 };
 

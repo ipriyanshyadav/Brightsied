@@ -11,7 +11,7 @@ import { briefHref } from "@/lib/contact";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Product engineering, forward-deployed engineers, AI systems, architecture audits and white-label engineering from Brightera.",
+    "Product engineering, forward-deployed engineers, AI systems, architecture audits and white-label engineering from Brightseid.",
   alternates: { canonical: "/services" },
 };
 

@@ -151,7 +151,7 @@ export function ProductWalkthrough({ product, variant = "spotlight" }: Props) {
         <div className="mx-auto max-w-3xl text-center">
           <p className="eyebrow">{variant === "spotlight" ? "Our products" : "How it works"}</p>
           <BlurReveal id={`${product.slug}-title`} className={`mt-4 font-medium ${variant === "spotlight" ? "text-hero" : "text-section"}`}>
-            {variant === "spotlight" ? `${product.shortName}, by Brightera.` : `Inside ${product.shortName}, step by step.`}
+            {variant === "spotlight" ? `${product.shortName}, by Brightseid.` : `Inside ${product.shortName}, step by step.`}
           </BlurReveal>
           {variant === "spotlight" && <p className="mx-auto mt-6 max-w-[54ch] text-ink/65">{product.summary}</p>}
           <div className="mt-7 flex flex-wrap justify-center gap-3">

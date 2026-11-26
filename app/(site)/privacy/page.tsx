@@ -4,7 +4,7 @@ import { getSettings } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Privacy policy",
-  description: "How Brightera collects and uses personal data shared through this website.",
+  description: "How Brightseid collects and uses personal data shared through this website.",
   alternates: { canonical: "/privacy" },
 };
 

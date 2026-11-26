@@ -21,7 +21,7 @@ const leadSchema = z.object({
   RESEND_API_KEY: z.string().min(1),
   // Where new briefs and demo requests are delivered.
   LEAD_INBOX_EMAIL: z.email(),
-  // Sender, e.g. "Brightera <hello@brightera.in>"; the domain must be verified in Resend.
+  // Sender, e.g. "Brightseid <hello@brightseid.in>"; the domain must be verified in Resend.
   LEAD_FROM_EMAIL: z.string().min(3),
   // Send a confirmation to the visitor. Needs a verified sending domain, so off by default.
   LEAD_SEND_AUTOREPLY: optional(z.enum(["true", "false"])).transform((v) => v === "true"),

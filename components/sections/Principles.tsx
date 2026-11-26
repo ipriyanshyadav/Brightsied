@@ -8,7 +8,7 @@ type Props = { items: Principle[]; eyebrow?: string; title?: string; body?: stri
 // How we work, as a lit timeline in the dark panel.
 export function Principles({
   items,
-  eyebrow = "Why Brightera",
+  eyebrow = "Why Brightseid",
   title = "Engineering you can hand to the next team.",
   body = "A small studio with big-company habits: written contracts, real tests and nothing hidden from the people paying for it.",
 }: Props) {

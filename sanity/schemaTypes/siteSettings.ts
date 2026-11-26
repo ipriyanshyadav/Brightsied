@@ -8,7 +8,7 @@ export const siteSettings = defineType({
   fields: [
     required("name", "Company name"),
     required("wordmark", "Wordmark", "string", { description: "Lower-case, shown in the nav and footer." }),
-    required("url", "Canonical URL", "url", { description: "No trailing slash, e.g. https://brightera.in" }),
+    required("url", "Canonical URL", "url", { description: "No trailing slash, e.g. https://brightseid.in" }),
     required("tagline", "Tagline"),
     text("description", "Description (search engines)"),
     defineField({ name: "email", title: "Contact email", type: "string", validation: (r) => r.required().email() }),

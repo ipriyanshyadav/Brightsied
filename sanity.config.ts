@@ -13,8 +13,8 @@ const SINGLETON_ACTIONS = new Set(["publish", "discardChanges", "restore"]);
 
 export const studioConfig = sanityProject
   ? defineConfig({
-      name: "brightera",
-      title: "Brightera",
+      name: "brightseid",
+      title: "Brightseid",
       basePath: "/studio",
       ...sanityProject,
       schema: { types: schemaTypes },

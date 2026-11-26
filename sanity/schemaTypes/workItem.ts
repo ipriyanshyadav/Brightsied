@@ -10,11 +10,11 @@ export const workItem = defineType({
     required("title", "Title"),
     slug("tab"),
     required("kind", "Kind", "string", {
-      options: { list: [{ title: "Brightera product", value: "product" }, { title: "Lab", value: "lab" }, { title: "Client work", value: "client" }] },
+      options: { list: [{ title: "Brightseid product", value: "product" }, { title: "Lab", value: "lab" }, { title: "Client work", value: "client" }] },
       description: "Client work needs the client's written OK before it is published.",
     }),
     required("tab", "Tab label"),
-    required("where", "Context line", "string", { description: "e.g. Brightera product" }),
+    required("where", "Context line", "string", { description: "e.g. Brightseid product" }),
     text("body", "Summary", 4),
     strings("points", "Key points"),
     strings("tags", "Tags"),

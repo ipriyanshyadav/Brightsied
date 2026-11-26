@@ -8,7 +8,7 @@ import { LocalTime } from "@/components/sections/LocalTime";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Tell Brightera about your project: book a call, send a brief, or message us on WhatsApp.",
+  description: "Tell Brightseid about your project: book a call, send a brief, or message us on WhatsApp.",
   alternates: { canonical: "/contact" },
 };
 

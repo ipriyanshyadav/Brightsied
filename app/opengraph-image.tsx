@@ -1,7 +1,7 @@
 import { getHome, getSettings } from "@/lib/content";
 import { OG_SIZE, renderOgCard } from "@/lib/og";
 
-export const alt = "Brightera: software that ships, AI that holds up";
+export const alt = "Brightseid: software that ships, AI that holds up";
 export const size = OG_SIZE;
 export const contentType = "image/png";
 

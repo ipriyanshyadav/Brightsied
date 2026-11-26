@@ -1,16 +1,16 @@
 import type { Audience, Hero, NavItem, Principle, ProcessStep, SiteSettings } from "@/lib/content/types";
 
-// Seed content for Brightera. The site reads it through lib/content; once Sanity is set up,
+// Seed content for Brightseid. The site reads it through lib/content; once Sanity is set up,
 // scripts/seed-sanity imports these files once and the CMS becomes the source.
 
 export const settings: SiteSettings = {
-  name: "Brightera",
-  wordmark: "brightera",
-  url: "https://brightera.in",
+  name: "Brightseid",
+  wordmark: "brightseid",
+  url: "https://brightseid.in",
   tagline: "We plan, build and ship software, and the AI inside it.",
   description:
-    "Brightera is a software engineering studio in Gurgaon. We plan, build and ship products, AI systems and backends for startups, growing businesses and agencies.",
-  // Switch to hello@brightera.in once the domain and its mailbox are set up.
+    "Brightseid is a software engineering studio in Gurgaon. We plan, build and ship products, AI systems and backends for startups, growing businesses and agencies.",
+  // Switch to hello@brightseid.in once the domain and its mailbox are set up.
   email: "ipriyanshyadav@gmail.com",
   whatsapp: "",
   bookingUrl: "",
@@ -34,7 +34,7 @@ export const nav: NavItem[] = [
 
 export const hero: Hero = {
   title: ["Software that ships.", "AI that holds up."],
-  sub: "Brightera is an engineering studio in Gurgaon. We plan, design, build and run products, backends and AI systems, from the first spec to production.",
+  sub: "Brightseid is an engineering studio in Gurgaon. We plan, design, build and run products, backends and AI systems, from the first spec to production.",
 };
 
 export const marquee = [

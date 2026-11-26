@@ -3,7 +3,7 @@ import type { Product } from "@/lib/content/types";
 export const products: Product[] = [
   {
     slug: "s2p",
-    name: "Brightera Source-to-Pay",
+    name: "Brightseid Source-to-Pay",
     shortName: "Source-to-Pay",
     tile: "audit",
     tagline: "Procurement from purchase request to paid invoice, with every decision on the record.",
@@ -83,7 +83,7 @@ export const products: Product[] = [
   },
   {
     slug: "mrp",
-    name: "Brightera MRP",
+    name: "Brightseid MRP",
     shortName: "MRP",
     tile: "db",
     tagline: "Material planning for discrete manufacturers, fast enough to re-plan whenever the plan changes.",
