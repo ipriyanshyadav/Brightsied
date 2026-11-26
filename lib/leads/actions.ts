@@ -41,8 +41,12 @@ function looksAutomated(data: FormData) {
 async function deliver(subject: string, text: string, visitor: { email: string; name: string }, autoReply: string) {
   const config = getLeadConfig();
   await sendEmail(config, { to: config.LEAD_INBOX_EMAIL, subject, text, replyTo: visitor.email });
-  if (config.LEAD_SEND_AUTOREPLY) {
+  if (!config.LEAD_SEND_AUTOREPLY) return;
+  // The lead is already in the inbox, so a failed confirmation is logged rather than shown as a failed submission.
+  try {
     await sendEmail(config, { to: visitor.email, subject: "We've got your message", text: autoReply });
+  } catch (err) {
+    console.error("Lead auto-reply failed:", err instanceof Error ? err.message : err);
   }
 }
 
