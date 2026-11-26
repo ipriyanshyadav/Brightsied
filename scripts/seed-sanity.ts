@@ -1,6 +1,7 @@
 // Uploads the seed content in content/seed/ to Sanity, once, so the CMS starts with what the
 // site shows today. Documents get stable ids, so running it again overwrites them with the
-// seed version: only re-run it on purpose.
+// seed version: only re-run it on purpose. Ids use dashes: Sanity treats ids containing a
+// dot as private, so public reads would not see them.
 //
 //   npm run cms:seed            write to the dataset (needs `npx sanity login`)
 //   npm run cms:seed -- --dry   print the documents instead
@@ -38,19 +39,19 @@ const docs: Doc[] = [
     principles: keyed(principles),
     audiences: keyed(audiences),
   },
-  ...packages.map((p, i) => ({ _id: `package.${p.slug}`, _type: "engagementPackage", order: i, ...p, slug: slugOf(p.slug) })),
+  ...packages.map((p, i) => ({ _id: `package-${p.slug}`, _type: "engagementPackage", order: i, ...p, slug: slugOf(p.slug) })),
   ...services.map((s, i) => ({
-    _id: `service.${s.slug}`,
+    _id: `service-${s.slug}`,
     _type: "service",
     order: i,
     ...s,
     slug: slugOf(s.slug),
     outcomes: keyed(s.outcomes),
     faqs: keyed(s.faqs),
-    packages: s.packages.map((p, j) => ref(`package.${p}`, j)),
+    packages: s.packages.map((p, j) => ref(`package-${p}`, j)),
   })),
   ...products.map((p, i) => ({
-    _id: `product.${p.slug}`,
+    _id: `product-${p.slug}`,
     _type: "product",
     order: i,
     ...p,
@@ -61,7 +62,7 @@ const docs: Doc[] = [
     window: { ...p.window, rows: keyed(p.window.rows) },
   })),
   ...work.map(({ caseStudy, ...w }, i) => ({
-    _id: `work.${w.slug}`,
+    _id: `work-${w.slug}`,
     _type: "workItem",
     order: i,
     ...w,
@@ -71,14 +72,14 @@ const docs: Doc[] = [
         ...caseStudy,
         approach: keyed(caseStudy.approach),
         decisions: keyed(caseStudy.decisions),
-        product: caseStudy.product ? { _type: "reference", _ref: `product.${caseStudy.product}` } : undefined,
+        product: caseStudy.product ? { _type: "reference", _ref: `product-${caseStudy.product}` } : undefined,
       },
     }),
   })),
   // Placeholders stay out of the CMS: only real, approved quotes belong there.
   ...testimonials
     .filter((t) => t.published)
-    .map((t, i) => ({ _id: `testimonial.${i}`, _type: "testimonial", order: i, ...t })),
+    .map((t, i) => ({ _id: `testimonial-${i}`, _type: "testimonial", order: i, ...t })),
 ];
 
 async function main() {

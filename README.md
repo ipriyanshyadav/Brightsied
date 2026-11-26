@@ -47,7 +47,7 @@ The Sanity command line needs **Node 22.12 or newer** (the site itself runs on N
 1. Create a free project at [sanity.io/manage](https://www.sanity.io/manage) and a dataset named `production`.
 2. In the project's **API → CORS origins**, add `http://localhost:3000` and your live URL, with credentials allowed. The embedded Studio needs both.
 3. Put the project id in `.env` as `NEXT_PUBLIC_SANITY_PROJECT_ID`.
-4. Run `npx sanity login`, then `npm run cms:seed` to copy `content/seed/` into the dataset. Use `npm run cms:seed -- --dry` to preview it first. The seed overwrites documents with the same ids, so only re-run it on purpose.
+4. Run `npx sanity login` (or put a personal token in `SANITY_AUTH_TOKEN`), then `npm run cms:seed` to copy `content/seed/` into the dataset. Use `npm run cms:seed -- --dry` to preview it first. The seed overwrites documents with the same ids, so only re-run it on purpose.
 5. Restart the site and open `/studio`.
 6. In **API → Webhooks**, add a webhook:
    - URL: `https://<your-domain>/api/revalidate`
@@ -62,8 +62,9 @@ The Sanity command line needs **Node 22.12 or newer** (the site itself runs on N
 | `NEXT_PUBLIC_SANITY_DATASET` | Usually `production` |
 | `SANITY_API_READ_TOKEN` | Only for a private dataset |
 | `SANITY_REVALIDATE_SECRET` | Webhook signing secret. Without it, `/api/revalidate` answers 503. |
+| `SANITY_AUTH_TOKEN` | Optional, CLI only: your personal token for `cms:seed`. Never deploy it. |
 
-The schemas live in `sanity/schemaTypes/`, and the GROQ queries in `lib/cms/queries.ts` return exactly the types in `lib/content/types.ts`. Site settings and the home page are single documents. A case study needs at least one work item with a filled-in case study, or the `/work/[slug]` build fails.
+Document ids must not contain a dot: Sanity treats those as private, so the site couldn't read them. The schemas live in `sanity/schemaTypes/`, and the GROQ queries in `lib/cms/queries.ts` return exactly the types in `lib/content/types.ts`. Site settings and the home page are single documents. A case study needs at least one work item with a filled-in case study, or the `/work/[slug]` build fails.
 
 ## Lead forms
 
