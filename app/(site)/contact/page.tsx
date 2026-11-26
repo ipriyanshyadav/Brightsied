@@ -34,7 +34,7 @@ export default async function ContactPage() {
         <div className="mx-auto grid max-w-[1180px] gap-6 lg:grid-cols-[7fr_4fr]">
           <div id="brief" className="card-soft scroll-mt-28 rounded-[28px] p-6 sm:p-10">
             <h2 className="text-2xl font-medium tracking-tight">Project brief</h2>
-            <p className="mt-2 text-sm text-ink/55">Five minutes now saves a week of back-and-forth later.</p>
+            <p className="mt-2 text-sm text-ink/65">Five minutes now saves a week of back-and-forth later.</p>
             <div className="mt-8">
               {/* The form reads ?interest= from the URL; the fallback is the same form without a preselection. */}
               <Suspense fallback={<BriefForm packages={pkgOptions} />}>

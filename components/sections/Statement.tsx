@@ -110,11 +110,12 @@ export function Statement() {
   return (
     <section ref={root} aria-label="How we deliver" className="bg-ground">
       <div ref={stage} className="stage relative overflow-hidden px-4 py-24 data-[anim=on]:h-[100svh] data-[anim=on]:py-0">
-        <p className="stmt mx-auto max-w-[23ch] text-center text-statement font-medium in-data-[anim=on]:pt-[24vh]">
+        {/* A heading, not a <p>: SplitText labels the element with aria-label, which <p> can't carry. */}
+        <h2 className="stmt mx-auto max-w-[23ch] text-center text-statement font-medium in-data-[anim=on]:pt-[24vh]">
           We start from a <Slot i={0} /> written spec, model the <Slot i={1} /> data,
           build the <Slot i={2} /> product, add <Slot i={3} /> AI where it earns its place
           and <Slot i={4} /> ship it to production.
-        </p>
+        </h2>
 
         <div className="pipeline-card panel-3d mx-auto mt-16 w-full max-w-[1120px] rounded-[28px] p-4 text-white sm:p-6 in-data-[anim=on]:absolute in-data-[anim=on]:inset-x-0 in-data-[anim=on]:top-[calc(54%-150px)] in-data-[anim=on]:mt-0 in-data-[anim=on]:w-[min(1120px,92vw)]">
           <div className="flex items-center gap-3 text-[13px]">

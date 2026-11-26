@@ -109,6 +109,22 @@ export type WorkItem = {
   tags: string[];
   tiles: [TileKind, TileKind, TileKind];
   href: string;
+  /** A full write-up at /work/[slug]. Items without one link straight to href. */
+  caseStudy?: CaseStudy;
+};
+
+export type CaseStudy = {
+  /** Who it was for, e.g. "In-house product" or the client's sector. */
+  client: string;
+  role: string;
+  challenge: string;
+  approach: { title: string; body: string }[];
+  decisions: { title: string; body: string }[];
+  /** Plain statements of what exists today. No invented metrics. */
+  outcome: string[];
+  stack: string[];
+  /** Slug of a Brightera product this work became, for the demo call to action. */
+  product?: string;
 };
 
 export type Testimonial = {

@@ -25,8 +25,15 @@ export function setMotionPaused(paused: boolean) {
 }
 
 const MIN_CORES = 4;
+// WebGL drawn by the CPU (no usable GPU, or a headless browser): real-time 3D would stall the page.
+const SOFTWARE_RENDERER = /swiftshader|llvmpipe|softpipe|software|basic render driver/i;
 
-/** Motion allowed, no data saver, WebGL2 available and a few CPU cores. */
+function rendererName(gl: WebGL2RenderingContext) {
+  const debug = gl.getExtension("WEBGL_debug_renderer_info");
+  return String(gl.getParameter(debug ? debug.UNMASKED_RENDERER_WEBGL : gl.RENDERER) ?? "");
+}
+
+/** Motion allowed, no data saver, a few CPU cores and hardware-accelerated WebGL2. */
 export function canRun3D() {
   if (window.matchMedia(REDUCED).matches) return false;
   const conn = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
@@ -34,6 +41,7 @@ export function canRun3D() {
   if ((navigator.hardwareConcurrency ?? MIN_CORES) < MIN_CORES) return false;
   const probe = document.createElement("canvas").getContext("webgl2");
   if (!probe) return false;
+  const software = SOFTWARE_RENDERER.test(rendererName(probe));
   probe.getExtension("WEBGL_lose_context")?.loseContext();
-  return true;
+  return !software;
 }

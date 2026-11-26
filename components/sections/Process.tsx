@@ -104,7 +104,7 @@ export function Process({ steps }: { steps: ProcessStep[] }) {
                 </div>
               </Tilt>
               <h3 className="mt-4 text-lg font-medium tracking-tight">{p.title}</h3>
-              <p className="mt-1 text-sm leading-relaxed text-ink/55">{p.body}</p>
+              <p className="mt-1 text-sm leading-relaxed text-ink/65">{p.body}</p>
             </li>
           ))}
         </ol>

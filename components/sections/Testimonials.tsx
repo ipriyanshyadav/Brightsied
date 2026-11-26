@@ -20,7 +20,7 @@ export function Testimonials({ items }: { items: Testimonial[] }) {
                 </blockquote>
                 <figcaption className="mt-auto pt-6 text-sm">
                   <span className="block font-medium">{t.name}</span>
-                  <span className="block text-ink/55">
+                  <span className="block text-ink/65">
                     {t.role}, {t.company}
                   </span>
                 </figcaption>

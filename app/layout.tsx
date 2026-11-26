@@ -3,7 +3,6 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { getSettings } from "@/lib/content";
 import Script from "next/script";
-import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { MOTION_PAUSED, MOTION_STORAGE_KEY } from "@/lib/motion";
 import { SOUND_ON, SOUND_STORAGE_KEY } from "@/lib/sound";
 import { SvgDefs } from "@/components/ui/GlossyTile";
@@ -57,13 +56,7 @@ export default function RootLayout({
           {`try{var s=localStorage,d=document.documentElement.dataset;if(s.getItem(${JSON.stringify(MOTION_STORAGE_KEY)})===${JSON.stringify(MOTION_PAUSED)})d.motion=${JSON.stringify(MOTION_PAUSED)};if(s.getItem(${JSON.stringify(SOUND_STORAGE_KEY)})===${JSON.stringify(SOUND_ON)})d.sound=${JSON.stringify(SOUND_ON)}}catch(e){}`}
         </Script>
         <SvgDefs />
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-ground"
-        >
-          Skip to content
-        </a>
-        <SmoothScroll>{children}</SmoothScroll>
+        {children}
       </body>
     </html>
   );

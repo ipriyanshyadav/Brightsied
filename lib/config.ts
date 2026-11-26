@@ -27,6 +27,18 @@ const leadSchema = z.object({
   LEAD_SEND_AUTOREPLY: optional(z.enum(["true", "false"])).transform((v) => v === "true"),
 });
 
+const cmsSchema = z.object({
+  // Only needed for a private dataset; public datasets are read without a token.
+  SANITY_API_READ_TOKEN: optional(z.string().min(1)),
+  // Shared secret of the Sanity webhook that calls /api/revalidate.
+  SANITY_REVALIDATE_SECRET: optional(z.string().min(16, "SANITY_REVALIDATE_SECRET should be at least 16 characters")),
+});
+
+export const cmsConfig = cmsSchema.parse({
+  SANITY_API_READ_TOKEN: process.env.SANITY_API_READ_TOKEN,
+  SANITY_REVALIDATE_SECRET: process.env.SANITY_REVALIDATE_SECRET,
+});
+
 export type LeadConfig = z.infer<typeof leadSchema>;
 
 /** Read when a form is submitted, so a missing key fails that request loudly, not the build. */

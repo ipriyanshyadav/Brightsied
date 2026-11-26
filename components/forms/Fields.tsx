@@ -21,7 +21,7 @@ function Label({ id, label, required }: { id: string; label: string; required?: 
   return (
     <label htmlFor={id} className="mb-1.5 block text-sm font-medium text-ink/80">
       {label}
-      {!required && <span className="font-normal text-ink/40"> (optional)</span>}
+      {!required && <span className="font-normal text-ink/60"> (optional)</span>}
     </label>
   );
 }
@@ -29,7 +29,7 @@ function Label({ id, label, required }: { id: string; label: string; required?: 
 function Messages({ errorId, hintId, error, hint }: { errorId: string; hintId: string; error?: string; hint?: string }) {
   return (
     <>
-      {hint && !error && <p id={hintId} className="mt-1.5 text-xs text-ink/50">{hint}</p>}
+      {hint && !error && <p id={hintId} className="mt-1.5 text-xs text-ink/65">{hint}</p>}
       {error && <p id={errorId} className="mt-1.5 text-xs text-coral">{error}</p>}
     </>
   );

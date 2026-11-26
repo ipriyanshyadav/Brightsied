@@ -70,9 +70,22 @@ export function WorkTabs({ items, eyebrow, title }: Props) {
                   </li>
                 ))}
               </ul>
-              <Link href={p.href} className="btn-light mt-8 inline-block rounded-xl px-4 py-2 text-sm font-medium">
-                {p.kind === "lab" ? "Try it" : "Explore"} <span aria-hidden="true">→</span>
-              </Link>
+              <div className="mt-8 flex flex-wrap gap-2">
+                {p.caseStudy && (
+                  <Link href={`/work/${p.slug}`} className="btn-light inline-block rounded-xl px-4 py-2 text-sm font-medium">
+                    Read the case study<span className="sr-only">: {p.tab}</span> <span aria-hidden="true">→</span>
+                  </Link>
+                )}
+                <Link
+                  href={p.href}
+                  className={`inline-block rounded-xl px-4 py-2 text-sm font-medium ${
+                    p.caseStudy ? "panel-cell text-white/90 transition-colors hover:text-white" : "btn-light"
+                  }`}
+                >
+                  {p.kind === "lab" ? "Try it" : p.kind === "product" ? "See the product" : "Explore"}
+                  <span className="sr-only">: {p.tab}</span>
+                </Link>
+              </div>
             </div>
           </div>
         </div>

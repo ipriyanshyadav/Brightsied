@@ -44,7 +44,7 @@ export function BriefForm({ packages, requested }: Props) {
         <FormStatus state={state} />
         <div className="flex flex-wrap items-center gap-4">
           <SubmitButton pending={pending} label="Send brief" pendingLabel="Sending…" />
-          <p className="text-xs text-ink/50">
+          <p className="text-xs text-ink/65">
             We use your details only to reply. See our <a href="/privacy" className="underline underline-offset-2">privacy policy</a>.
           </p>
         </div>
