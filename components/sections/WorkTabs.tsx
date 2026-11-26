@@ -1,47 +1,44 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { projects } from "@/lib/content";
-import type { TileKind } from "@/components/ui/GlossyTile";
+import Link from "next/link";
+import type { WorkItem } from "@/lib/content/types";
 import { LiveTile } from "@/components/ui/LiveTile";
 import { BlurReveal } from "@/components/ui/BlurReveal";
 
-const art: Record<string, [TileKind, TileKind, TileKind]> = {
-  "rag-chatbot": ["docs", "vectors", "api"],
-  "rest-apis": ["api", "db", "terminal"],
-  "mrp-saas": ["db", "queue", "agents"],
-};
+type Props = { items: WorkItem[]; eyebrow: string; title: string };
 
-export function Projects() {
+// One work item at a time, chosen from a sticky pill tab bar (arrow keys move between tabs).
+export function WorkTabs({ items, eyebrow, title }: Props) {
   const [active, setActive] = useState(0);
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
-  const p = projects[active];
-  const [a, b, c] = art[p.id];
+  const p = items[active];
+  const [a, b, c] = p.tiles;
 
   const onKey = (e: React.KeyboardEvent) => {
     const dir = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
     if (!dir) return;
     e.preventDefault();
-    const next = (active + dir + projects.length) % projects.length;
+    const next = (active + dir + items.length) % items.length;
     setActive(next);
     tabs.current[next]?.focus();
   };
 
   return (
-    <section id="projects" aria-labelledby="projects-title" className="scroll-mt-24 bg-ground px-4 pb-16 pt-28 sm:px-8 sm:pt-36">
+    <section aria-labelledby="work-tabs-title" className="scroll-mt-24 bg-ground px-4 pb-16 pt-28 sm:px-8 sm:pt-36">
       <div className="mx-auto max-w-[1180px]">
         <div className="text-center">
-          <p className="eyebrow">Projects</p>
-          <BlurReveal id="projects-title" className="mt-4 text-section font-medium">
-            Three more things I&apos;ve built
+          <p className="eyebrow">{eyebrow}</p>
+          <BlurReveal id="work-tabs-title" className="mt-4 text-section font-medium">
+            {title}
           </BlurReveal>
         </div>
 
         <div
-          key={p.id}
+          key={p.slug}
           role="tabpanel"
-          id={`panel-${p.id}`}
-          aria-labelledby={`tab-${p.id}`}
+          id={`panel-${p.slug}`}
+          aria-labelledby={`tab-${p.slug}`}
           className="panel-in mt-12 grid gap-4 lg:grid-cols-2"
         >
           <div className="card-soft relative isolate aspect-[5/4] overflow-hidden rounded-[28px]">
@@ -73,6 +70,9 @@ export function Projects() {
                   </li>
                 ))}
               </ul>
+              <Link href={p.href} className="btn-light mt-8 inline-block rounded-xl px-4 py-2 text-sm font-medium">
+                {p.kind === "lab" ? "Try it" : "Explore"} <span aria-hidden="true">→</span>
+              </Link>
             </div>
           </div>
         </div>
@@ -80,20 +80,20 @@ export function Projects() {
         <div className="sticky bottom-6 z-20 mt-10 flex justify-center">
           <div
             role="tablist"
-            aria-label="Projects"
+            aria-label={eyebrow}
             onKeyDown={onKey}
             className="glass flex max-w-full gap-1 overflow-x-auto rounded-2xl p-1.5"
           >
-            {projects.map((proj, i) => (
+            {items.map((proj, i) => (
               <button
-                key={proj.id}
+                key={proj.slug}
                 ref={(el) => {
                   tabs.current[i] = el;
                 }}
                 role="tab"
-                id={`tab-${proj.id}`}
+                id={`tab-${proj.slug}`}
                 aria-selected={active === i}
-                aria-controls={`panel-${proj.id}`}
+                aria-controls={`panel-${proj.slug}`}
                 tabIndex={active === i ? 0 : -1}
                 onClick={() => setActive(i)}
                 className={`shrink-0 rounded-xl px-4 py-2 text-[13px] transition-colors ${

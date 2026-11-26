@@ -28,10 +28,10 @@ const SPRING = 26;
 const DAMPING = 6.5;
 // A moving cursor brushes nearby tiles aside; a still one leaves them be, so they can be caught.
 const KICK_RADIUS = 170;
-const CURSOR_KICK = 5;
+const CURSOR_KICK = 3;
 const POINTER_FADE = 10;
-const BOB_PX = 8;
-const PARALLAX_PX = { x: 16, y: 11 };
+const BOB_PX = 5;
+const PARALLAX_PX = { x: 11, y: 8 };
 const TILT_MAX = 0.5;
 // Grab and throw.
 const HIT_SCALE = 0.55; // grab radius as a share of tile size

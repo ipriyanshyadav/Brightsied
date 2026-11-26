@@ -40,7 +40,7 @@ export function Tuning() {
   }, [size, k]);
 
   return (
-    <section aria-labelledby="tune-title" className="bg-ground px-4 py-28 sm:px-8 sm:py-36">
+    <section id="lab" aria-labelledby="tune-title" className="scroll-mt-24 bg-ground px-4 py-28 sm:px-8 sm:py-36">
       <div className="mx-auto grid max-w-[1180px] gap-12 lg:grid-cols-[7fr_5fr] lg:gap-16">
         <div className="panel-3d order-2 rounded-[28px] p-4 text-white sm:p-6 lg:order-1">
           <div className="panel-cell grid gap-6 rounded-2xl p-5 sm:grid-cols-2">

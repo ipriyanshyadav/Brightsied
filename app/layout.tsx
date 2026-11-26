@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { site } from "@/lib/content";
+import { getSettings } from "@/lib/content";
 import Script from "next/script";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { MOTION_PAUSED, MOTION_STORAGE_KEY } from "@/lib/motion";
@@ -22,27 +22,24 @@ const code = localFont({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL(site.url),
-  title: {
-    default: `${site.name}, ${site.role}`,
-    template: `%s | ${site.name}`,
-  },
-  description: site.description,
-  alternates: { canonical: "/" },
-  openGraph: {
-    type: "website",
-    url: site.url,
-    title: `${site.name}, ${site.role}`,
+export async function generateMetadata(): Promise<Metadata> {
+  const site = await getSettings();
+  const title = `${site.name}: ${site.tagline}`;
+  return {
+    metadataBase: new URL(site.url),
+    title: { default: title, template: `%s | ${site.name}` },
     description: site.description,
-    siteName: site.name,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: `${site.name}, ${site.role}`,
-    description: site.description,
-  },
-};
+    openGraph: {
+      type: "website",
+      locale: "en_IN",
+      url: site.url,
+      title,
+      description: site.description,
+      siteName: site.name,
+    },
+    twitter: { card: "summary_large_image", title, description: site.description },
+  };
+}
 
 export const viewport: Viewport = {
   themeColor: "#f4f4f4",

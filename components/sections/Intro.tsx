@@ -1,13 +1,10 @@
-import { hero } from "@/lib/content";
-
-// A short centred greeting that fades out to reveal the hero. Pure CSS, so it also
+// The wordmark appears briefly, then fades out to reveal the hero. Pure CSS, so it also
 // clears itself without JavaScript, and it is skipped under reduced motion.
-export function Intro() {
+export function Intro({ wordmark }: { wordmark: string }) {
   return (
     <div aria-hidden="true" className="intro fixed inset-0 z-[70] grid place-items-center bg-ground">
-      <p className="intro-text text-[15px] tracking-tight">
-        <span className="text-muted">{hero.intro[0]} </span>
-        <span>{hero.intro[1]}</span>
+      <p className="intro-text text-[22px] font-extrabold italic tracking-[-0.04em]">
+        {wordmark}<span className="text-brand">.</span>
       </p>
       <style>{`
         .intro { animation: intro-out .6s 1.35s both ease-in; }

@@ -1,4 +1,5 @@
-import { process, site } from "@/lib/content";
+import Link from "next/link";
+import type { ProcessStep } from "@/lib/content/types";
 import { LiveTile } from "@/components/ui/LiveTile";
 import { BlurReveal } from "@/components/ui/BlurReveal";
 import { Tilt } from "@/components/ui/Tilt";
@@ -77,25 +78,22 @@ function ShipVisual() {
 
 const visuals = [<DesignVisual key="d" />, <BuildVisual key="b" />, <IntegrateVisual key="i" />, <ShipVisual key="s" />];
 
-export function Process() {
+export function Process({ steps }: { steps: ProcessStep[] }) {
   return (
     <section id="process" aria-labelledby="process-title" className="scroll-mt-24 bg-ground px-4 py-28 sm:px-8 sm:py-36">
       <div className="mx-auto max-w-[1180px]">
-        <p className="eyebrow">Process</p>
+        <p className="eyebrow">How we engage</p>
         <div className="mt-4 flex flex-wrap items-end justify-between gap-6">
           <BlurReveal id="process-title" className="max-w-[20ch] text-section font-medium">
-            From API design to production, end to end.
+            From first conversation to production, one team.
           </BlurReveal>
-          <a
-            href={site.resume}
-            className="btn-light rounded-xl px-4 py-2 text-sm font-medium"
-          >
-            Download résumé
-          </a>
+          <Link href="/services#packages" className="btn-light rounded-xl px-4 py-2 text-sm font-medium">
+            See engagement models
+          </Link>
         </div>
 
         <ol className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {process.map((p, i) => (
+          {steps.map((p, i) => (
             <li key={p.title}>
               <Tilt max={6} className="group">
                 <div
