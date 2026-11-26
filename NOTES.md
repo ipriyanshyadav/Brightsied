@@ -4,32 +4,31 @@ Last updated: 26 November 2026. For how the site works and how to run it, see `R
 
 ## Where things stand
 
-- **Code:** the site is on the `brightseid` git branch, which is not yet merged into `main`. The repo has no remote (no GitHub copy yet). The original personal portfolio is preserved at the git tag `portfolio-v1`.
+- **Live site:** https://brightseid.vercel.app, on Vercel project `brightseid` (Next.js, Node 24, Mumbai region `bom1`). Every push to `main` deploys automatically.
+- **Code:** GitHub repo `ipriyanshyadav/Brightsied`, branch `main`. The original personal portfolio is preserved at the git tag `portfolio-v1`, which isn't pushed (`git push origin portfolio-v1` if you want it on GitHub).
+- **Spelling to settle:** the site says **Brightseid** but the GitHub repo is **Brightsied**. Fix whichever is wrong before buying the domain.
 - **Node:** 24 LTS (Homebrew `node@24`). Node 20 is still installed. The Sanity CLI needs Node 22.12 or newer.
-- **Content:** comes from Sanity project `4xtzkdcg`, dataset `production`. Edit at http://localhost:3000/studio and sign in with your Sanity account. The files in `content/seed/` are now only the starting copy.
-- **Lead emails:** the project brief and demo forms send email through Resend to your Gmail. Two test emails were sent on 26 Nov. **Check they arrived, including Spam.**
+- **Content:** comes from Sanity project `4xtzkdcg`, dataset `production`. Edit at https://brightseid.vercel.app/studio (or http://localhost:3000/studio) and sign in with your Sanity account. Publishing refreshes the live site in about 6 seconds through the webhook. The files in `content/seed/` are now only the starting copy.
+- **Lead emails:** the project brief and demo forms send email through Resend to your Gmail. Test emails were sent on 26 Nov, including one from the live site. **Check they arrived, including Spam.**
+- **Vercel settings:** the Sanity project id, dataset, lead email settings and `NEXT_PUBLIC_SITE_URL=https://brightseid.vercel.app` are stored as plain settings. `RESEND_API_KEY` and `SANITY_REVALIDATE_SECRET` are stored as sensitive. `SANITY_AUTH_TOKEN` is deliberately **not** on Vercel.
+- **Sanity:** CORS allows `http://localhost:3000` and `https://brightseid.vercel.app`. A webhook ("Vercel revalidate") posts to `https://brightseid.vercel.app/api/revalidate` on create, update and delete.
 - **Checks run on 26 Nov:**
   - Type check, lint and production build pass.
-  - The live Sanity edit and refresh round trip passed.
-  - Lighthouse (mobile): home 89, inner pages 91–94. Best practices and SEO 100 on every page; accessibility 96–100.
+  - All live pages return 200; unknown pages return 404.
+  - A live edit refreshed the site through Sanity's real webhook in about 6 seconds, and a forged webhook signature was rejected.
+  - Lighthouse (mobile, local build): home 89, inner pages 91–94. Best practices and SEO 100 on every page; accessibility 96–100.
 
 ## When the domain is bought
 
-1. **Vercel.** Import the repo; push it to GitHub first. Add every variable from `.env` **except `SANITY_AUTH_TOKEN`**, then attach the domain.
-2. **Site URL.** If the domain isn't `brightseid.in`, update the URL in Sanity under Site settings (or set `NEXT_PUBLIC_SITE_URL`).
+1. **Vercel.** Add the domain under Project → Settings → Domains and set the DNS records it shows. Then set `NEXT_PUBLIC_SITE_URL=https://yourdomain` (Production) and redeploy.
+2. **Site URL in Sanity.** Update the canonical URL under Site settings to match the domain.
 3. **Resend.**
    - Verify the domain (add the DNS records Resend shows you).
-   - Set `LEAD_FROM_EMAIL=Brightseid <hello@yourdomain>`.
-   - Set `LEAD_SEND_AUTOREPLY=true`.
+   - In Vercel, set `LEAD_FROM_EMAIL=Brightseid <hello@yourdomain>` and `LEAD_SEND_AUTOREPLY=true`, then redeploy.
    - Send a test brief from the live site.
 4. **Mailbox.** Create `hello@yourdomain`, then change the contact email in Sanity Site settings. It's your Gmail for now.
 5. **Sanity, CORS.** Add `https://yourdomain` under API → CORS origins, with credentials allowed.
-6. **Sanity, webhook.** Add one under API → Webhooks:
-   - URL: `https://yourdomain/api/revalidate`
-   - Trigger: create, update and delete
-   - Secret: the `SANITY_REVALIDATE_SECRET` value from `.env`
-
-   Then edit something in the Studio and check the live site updates. Without the webhook, edits appear within about an hour.
+6. **Sanity, webhook.** Change the URL of the existing "Vercel revalidate" webhook to `https://yourdomain/api/revalidate`; keep the same secret. Then edit something in the Studio and check the live site updates.
 7. **Search engines.** Submit `https://yourdomain/sitemap.xml` in Google Search Console.
 
 ## Details to fill in (all editable in Sanity → Site settings)
@@ -81,5 +80,5 @@ Last updated: 26 November 2026. For how the site works and how to run it, see `R
 
 ## Possible next steps
 
-- Push the repo to GitHub and merge `brightseid` into `main`.
-- Deploy a Vercel preview now, before the domain exists, to test the site live (it gets a `*.vercel.app` URL).
+- Run Lighthouse against the live site (https://brightseid.vercel.app) and Google's Rich Results test on the structured data, now that it's public.
+- Test on a real phone.
