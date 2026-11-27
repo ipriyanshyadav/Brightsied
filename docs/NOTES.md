@@ -1,6 +1,6 @@
 # Brightseid website: notes and open items
 
-Last updated: 26 November 2026. For how the site works and how to run it, see `README.md`.
+Last updated: 26 November 2026. For how the site works and how to run it, see `../README.md`.
 
 ## Where things stand
 
@@ -8,7 +8,7 @@ Last updated: 26 November 2026. For how the site works and how to run it, see `R
 - **Code:** GitHub repo `ipriyanshyadav/Brightsied`, branch `main`. The original personal portfolio is preserved at the git tag `portfolio-v1`, which isn't pushed (`git push origin portfolio-v1` if you want it on GitHub).
 - **Spelling to settle:** the site says **Brightseid** but the GitHub repo is **Brightsied**. Fix whichever is wrong before buying the domain.
 - **Node:** 24 LTS (Homebrew `node@24`). Node 20 is still installed. The Sanity CLI needs Node 22.12 or newer.
-- **Content:** comes from Sanity project `4xtzkdcg`, dataset `production`. Edit at https://brightseid.vercel.app/studio (or http://localhost:3000/studio) and sign in with your Sanity account. Publishing refreshes the live site in about 6 seconds through the webhook. The files in `content/seed/` are now only the starting copy.
+- **Content:** comes from Sanity project `4xtzkdcg`, dataset `production`. Edit at https://brightseid.vercel.app/studio (or http://localhost:3000/studio) and sign in with your Sanity account. Publishing refreshes the live site in about 6 seconds through the webhook. The files in `src/content/seed/` are now only the starting copy.
 - **Lead emails:** the project brief and demo forms send email through Resend to your Gmail. Test emails were sent on 26 Nov, including one from the live site. **Check they arrived, including Spam.**
 - **Vercel settings:** the Sanity project id, dataset, lead email settings and `NEXT_PUBLIC_SITE_URL=https://brightseid.vercel.app` are stored as plain settings. `RESEND_API_KEY` and `SANITY_REVALIDATE_SECRET` are stored as sensitive. `SANITY_AUTH_TOKEN` is deliberately **not** on Vercel.
 - **Sanity:** CORS allows `http://localhost:3000` and `https://brightseid.vercel.app`. A webhook ("Vercel revalidate") posts to `https://brightseid.vercel.app/api/revalidate` on create, update and delete.
@@ -70,7 +70,7 @@ Last updated: 26 November 2026. For how the site works and how to run it, see `R
 
 - **Case studies can't all be removed.** If every Work item in Sanity loses its case study, the build fails, because `/work/[slug]` needs at least one. Keep at least one case study.
 - **Document IDs** must not contain a dot. Sanity makes those private, so the site couldn't read them.
-- **`npm run cms:seed` overwrites** Sanity content with what's in `content/seed/`. Only run it on purpose.
+- **`npm run cms:seed` overwrites** Sanity content with what's in `src/content/seed/`. Only run it on purpose.
 - **Dev-server warning about uncached data on `/products/[slug]`.** It only appears in development; the production build prerenders these pages fine.
 - **Stale styles after a build.** Once, an edit to `globals.css` didn't reach the production build because of a stale Turbopack cache. If styles look out of date, delete `.next` (except `.next/dev`) and rebuild.
 - **Lighthouse contrast warnings on headings.** They are caught mid blur-in animation; the final text has full contrast.

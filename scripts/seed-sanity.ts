@@ -1,4 +1,4 @@
-// Uploads the seed content in content/seed/ to Sanity, once, so the CMS starts with what the
+// Uploads the seed content in src/content/seed/ to Sanity, once, so the CMS starts with what the
 // site shows today. Documents get stable ids, so running it again overwrites them with the
 // seed version: only re-run it on purpose. Ids use dashes: Sanity treats ids containing a
 // dot as private, so public reads would not see them.
@@ -7,11 +7,11 @@
 //   npm run cms:seed -- --dry   print the documents instead
 
 import { getCliClient } from "sanity/cli";
-import { settings, hero, marquee, process as steps, principles, audiences } from "../content/seed/site";
-import { packages, services } from "../content/seed/services";
-import { products } from "../content/seed/products";
-import { testimonials, work } from "../content/seed/work";
-import { SANITY_API_VERSION, SINGLETONS } from "../sanity/env";
+import { settings, hero, marquee, process as steps, principles, audiences } from "../src/content/seed/site";
+import { packages, services } from "../src/content/seed/services";
+import { products } from "../src/content/seed/products";
+import { testimonials, work } from "../src/content/seed/work";
+import { SANITY_API_VERSION, SINGLETONS } from "../src/sanity/env";
 
 type Doc = { _id: string; _type: string; [key: string]: unknown };
 

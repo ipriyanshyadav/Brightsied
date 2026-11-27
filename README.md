@@ -4,6 +4,8 @@ The company site for Brightseid, a software engineering studio in Gurgaon. It is
 
 The original personal portfolio is preserved at the git tag `portfolio-v1`.
 
+Deployment status and open items are in `docs/NOTES.md`. Background research on the 3D approach is in `docs/research/`.
+
 ## Run it
 
 ```bash
@@ -15,21 +17,21 @@ npm run build && npm start
 
 ## Editing content
 
-Pages read content only through the async getters in `lib/content/index.ts`. Where it comes from depends on one setting:
+Pages read content only through the async getters in `src/lib/content/index.ts`. Where it comes from depends on one setting:
 
-- **`NEXT_PUBLIC_SANITY_PROJECT_ID` empty:** the getters serve the seed files in `content/seed/`. Edit them and redeploy.
+- **`NEXT_PUBLIC_SANITY_PROJECT_ID` empty:** the getters serve the seed files in `src/content/seed/`. Edit them and redeploy.
 - **Set:** the getters query Sanity, and you edit everything at `/studio`. Publishing triggers the webhook, which refreshes the site without a redeploy.
 
-Navigation stays in `content/seed/site.ts` in both modes, because it mirrors the routes.
+Navigation stays in `src/content/seed/site.ts` in both modes, because it mirrors the routes.
 
 | File | What it holds |
 |---|---|
-| `content/seed/site.ts` | Name, domain, email, WhatsApp, booking link, legal details, nav, hero, process, principles |
-| `content/seed/services.ts` | The five services and the engagement packages (no prices) |
-| `content/seed/products.ts` | Source-to-Pay and MRP: features, walkthrough steps, illustrative app window |
-| `content/seed/work.ts` | Work items, case studies (`caseStudy`, published at `/work/[slug]`) and testimonials (shown only when `published: true`) |
+| `src/content/seed/site.ts` | Name, domain, email, WhatsApp, booking link, legal details, nav, hero, process, principles |
+| `src/content/seed/services.ts` | The five services and the engagement packages (no prices) |
+| `src/content/seed/products.ts` | Source-to-Pay and MRP: features, walkthrough steps, illustrative app window |
+| `src/content/seed/work.ts` | Work items, case studies (`caseStudy`, published at `/work/[slug]`) and testimonials (shown only when `published: true`) |
 
-Before launch, fill in these values in `content/seed/site.ts`:
+Before launch, fill in these values in `src/content/seed/site.ts`:
 
 - `whatsapp`: digits with country code, e.g. `919876543210`. While empty, WhatsApp links are hidden.
 - `bookingUrl`: a Cal.com or Calendly link. While empty, "Book a call" goes to the brief form.
@@ -47,7 +49,7 @@ The Sanity command line needs **Node 22.12 or newer** (the site itself runs on N
 1. Create a free project at [sanity.io/manage](https://www.sanity.io/manage) and a dataset named `production`.
 2. In the project's **API → CORS origins**, add `http://localhost:3000` and your live URL, with credentials allowed. The embedded Studio needs both.
 3. Put the project id in `.env` as `NEXT_PUBLIC_SANITY_PROJECT_ID`.
-4. Run `npx sanity login` (or put a personal token in `SANITY_AUTH_TOKEN`), then `npm run cms:seed` to copy `content/seed/` into the dataset. Use `npm run cms:seed -- --dry` to preview it first. The seed overwrites documents with the same ids, so only re-run it on purpose.
+4. Run `npx sanity login` (or put a personal token in `SANITY_AUTH_TOKEN`), then `npm run cms:seed` to copy `src/content/seed/` into the dataset. Use `npm run cms:seed -- --dry` to preview it first. The seed overwrites documents with the same ids, so only re-run it on purpose.
 5. Restart the site and open `/studio`.
 6. In **API → Webhooks**, add a webhook:
    - URL: `https://<your-domain>/api/revalidate`
@@ -64,11 +66,11 @@ The Sanity command line needs **Node 22.12 or newer** (the site itself runs on N
 | `SANITY_REVALIDATE_SECRET` | Webhook signing secret. Without it, `/api/revalidate` answers 503. |
 | `SANITY_AUTH_TOKEN` | Optional, CLI only: your personal token for `cms:seed`. Never deploy it. |
 
-Document ids must not contain a dot: Sanity treats those as private, so the site couldn't read them. The schemas live in `sanity/schemaTypes/`, and the GROQ queries in `lib/cms/queries.ts` return exactly the types in `lib/content/types.ts`. Site settings and the home page are single documents. A case study needs at least one work item with a filled-in case study, or the `/work/[slug]` build fails.
+Document ids must not contain a dot: Sanity treats those as private, so the site couldn't read them. The schemas live in `src/sanity/schemaTypes/`, and the GROQ queries in `src/lib/cms/queries.ts` return exactly the types in `src/lib/content/types.ts`. Site settings and the home page are single documents. A case study needs at least one work item with a filled-in case study, or the `/work/[slug]` build fails.
 
 ## Lead forms
 
-The project brief (`/contact`) and demo requests (`/products/[slug]#demo`) are server actions in `lib/leads/actions.ts`. They validate input with zod and send a plain-text email through the Resend API.
+The project brief (`/contact`) and demo requests (`/products/[slug]#demo`) are server actions in `src/lib/leads/actions.ts`. They validate input with zod and send a plain-text email through the Resend API.
 
 | Env var | Purpose |
 |---|---|
@@ -93,9 +95,9 @@ The forms reject submissions that fill the hidden honeypot field or arrive less 
 | `/api/revalidate` | Sanity publish webhook (signature-checked) |
 | `/privacy`, `/terms` | `LegalPage` |
 
-Shared chrome (smooth scrolling, skip link, nav, footer, live 3D layer, corner controls, Organization JSON-LD) lives in `app/(site)/layout.tsx`.
+Shared chrome (smooth scrolling, skip link, nav, footer, live 3D layer, corner controls, Organization JSON-LD) lives in `src/app/(site)/layout.tsx`.
 
-Every service, product and case study has its own share image, drawn by `lib/og.tsx`.
+Every service, product and case study has its own share image, drawn by `src/lib/og.tsx`.
 
 ## Deploying
 

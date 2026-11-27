@@ -8,14 +8,14 @@ import { SOUND_ON, SOUND_STORAGE_KEY } from "@/lib/sound";
 import { SvgDefs } from "@/components/ui/GlossyTile";
 
 const display = localFont({
-  src: "../node_modules/@fontsource-variable/inter-tight/files/inter-tight-latin-wght-normal.woff2",
+  src: "../../node_modules/@fontsource-variable/inter-tight/files/inter-tight-latin-wght-normal.woff2",
   variable: "--font-display",
   weight: "100 900",
   display: "swap",
 });
 
 const code = localFont({
-  src: "../node_modules/@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2",
+  src: "../../node_modules/@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2",
   variable: "--font-code",
   weight: "100 800",
   display: "swap",

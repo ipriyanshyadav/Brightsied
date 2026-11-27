@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Agent instructions live in .claude/CLAUDE.md; stop `next dev` from writing AGENTS.md.
+  agentRules: false,
   cacheComponents: true,
   partialPrefetching: true,
   turbopack: {

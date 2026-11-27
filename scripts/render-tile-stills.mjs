@@ -1,5 +1,5 @@
 // Renders the 3D tiles to transparent PNG stills in public/tiles, using the dev-only page
-// app/dev/tile-stills and headless Chrome. The stills are what visitors see before the
+// src/app/dev/tile-stills and headless Chrome. The stills are what visitors see before the
 // live 3D loads (and instead of it on reduced-motion or low-power devices).
 //
 //   npm run dev                # in another terminal
@@ -21,7 +21,7 @@ const CHROME = process.env.CHROME_PATH ?? "/Applications/Google Chrome.app/Conte
 // "<kind>-glass" renders the clear glass version of a tile (used for the hero's glass tile).
 const ALL_KINDS = ["docs", "vectors", "agents", "queue", "audit", "api", "terminal", "db", "vectors-glass"];
 const KINDS = process.env.TILES_KINDS ? process.env.TILES_KINDS.split(",") : ALL_KINDS;
-// Must match STILL_PX in components/ui/GlossyTile.tsx.
+// Must match STILL_PX in src/components/ui/GlossyTile.tsx.
 const SIZE = 768;
 const OUT_DIR = join(process.cwd(), "public", "tiles");
 const READY_TIMEOUT_MS = 30000;
