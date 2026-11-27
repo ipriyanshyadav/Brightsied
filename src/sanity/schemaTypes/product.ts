@@ -40,7 +40,7 @@ export const product = defineType({
     strings("audience", "Made for"),
     titleBodies("features", "Features"),
     strings("rules", "Guarantees"),
-    walkthrough("steps", "Home page journey", "The end-to-end story shown when this product is featured on the home page."),
+    walkthrough("steps", "Home page journey", "The end-to-end story shown for this product on the home page."),
     defineField({
       name: "modules",
       title: "Modules",

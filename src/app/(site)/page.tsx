@@ -23,7 +23,6 @@ export default async function Home() {
     getPackages(),
     getTestimonials(),
   ]);
-  const [flagship] = products;
 
   return (
     <>
@@ -32,7 +31,7 @@ export default async function Home() {
       <TechMarquee items={home.marquee} />
       <Statement />
       <Capabilities services={services} />
-      <ProductWalkthrough product={flagship} />
+      <ProductWalkthrough products={products} />
       <Process steps={home.process} />
       <Principles items={home.principles} />
       <Packages items={packages} />

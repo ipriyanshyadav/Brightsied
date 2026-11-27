@@ -90,7 +90,7 @@ export type Product = {
   audience: string[];
   features: { title: string; body: string }[];
   rules: string[];
-  /** The end-to-end journey, shown when the product is featured on the home page. */
+  /** The end-to-end journey, shown for this product on the home page. */
   steps: ProductStep[];
   modules: ProductModule[];
   /** Illustrative app window; sample data, labelled as such on the page. */

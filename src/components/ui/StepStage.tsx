@@ -18,9 +18,15 @@ const pctX = (x: number) => ((x + STAGE_W / 2) / STAGE_W) * 100;
 const pctY = (y: number) => ((STAGE_H / 2 - y) / STAGE_H) * 100;
 const pctW = (w: number) => (w / STAGE_W) * 100;
 const pctH = (h: number) => (h / STAGE_H) * 100;
+/**
+ * A stage point as an offset in container units (the stage is the query container), so
+ * actors move with `translate`, which the browser can animate without re-running layout.
+ */
+const offset = (x: number, y: number, dx: string, dy: string) =>
+  `calc(${pctX(x)}cqw + ${dx}) calc(${(pctY(y) * STAGE_H) / STAGE_W}cqw + ${dy})`;
 const halfHeight = (a: CastMember) => (a.type === "bar" ? 0 : (a.size * ASPECT[a.type]) / 2);
 
-const MOVE = "motion-safe:transition-[left,top,width,height,opacity,scale] motion-safe:duration-700 ease-(--ease-out-soft)";
+const MOVE = "motion-safe:transition-[translate,width,height,opacity,scale,rotate] motion-safe:duration-700 ease-(--ease-out-soft)";
 
 const icons: Record<BadgeIcon, React.ReactNode> = {
   check: <path d="M6.5 12.5l3.6 3.6 7.4-8.2" />,
@@ -105,18 +111,16 @@ function Shape({ a }: { a: CastMember }) {
 function Actor2D({ a }: { a: CastMember }) {
   const bar = a.type === "bar";
   const style: React.CSSProperties = {
-    left: `${pctX(a.at[0])}%`,
-    top: `${pctY(a.at[1])}%`,
     width: `${pctW(a.size)}%`,
     height: bar ? `${pctH(a.h ?? 0)}%` : undefined,
     aspectRatio: bar ? undefined : `1 / ${ASPECT[a.type]}`,
-    translate: bar ? "-50% -100%" : "-50% -50%",
+    translate: offset(a.at[0], a.at[1], "-50%", bar ? "-100%" : "-50%"),
     rotate: a.rot ? `${-a.rot}deg` : undefined,
     opacity: a.shown ? (a.dim ? 0.38 : 1) : 0,
     scale: a.shown ? (a.dim ? 0.9 : 1) : 0.6,
   };
   return (
-    <span className={`absolute block [container-type:inline-size] ${MOVE}`} style={style}>
+    <span className={`absolute left-0 top-0 block [container-type:inline-size] ${MOVE}`} style={style}>
       <Shape a={a} />
     </span>
   );
@@ -125,11 +129,11 @@ function Actor2D({ a }: { a: CastMember }) {
 function Label({ a }: { a: CastMember }) {
   const right = a.side === "right";
   const style: React.CSSProperties = right
-    ? { left: `${pctX(a.at[0] + a.size / 2 + LABEL_GAP)}%`, top: `${pctY(a.at[1])}%`, translate: "0 -50%" }
-    : { left: `${pctX(a.at[0])}%`, top: `${pctY(a.at[1] - halfHeight(a) - LABEL_GAP)}%`, translate: "-50% 0" };
+    ? { translate: offset(a.at[0] + a.size / 2 + LABEL_GAP, a.at[1], "0px", "-50%") }
+    : { translate: offset(a.at[0], a.at[1] - halfHeight(a) - LABEL_GAP, "-50%", "0px") };
   return (
     <span
-      className={`absolute whitespace-nowrap text-[clamp(10px,2.6cqi,13px)] font-medium tracking-tight ${MOVE} ${a.dim ? "text-ink/35" : "text-ink/70"}`}
+      className={`absolute left-0 top-0 whitespace-nowrap text-[clamp(10px,2.6cqi,13px)] font-medium tracking-tight ${MOVE} ${a.dim ? "text-ink/35" : "text-ink/70"}`}
       style={{ ...style, opacity: a.shown ? 1 : 0 }}
     >
       {a.label}
