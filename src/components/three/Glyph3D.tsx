@@ -16,7 +16,7 @@ const px = (v: number) => (v - 50) / 100;
 const py = (v: number) => (50 - v) / 100;
 const v3 = (x: number, y: number, z = 0) => new THREE.Vector3(px(x), py(y), z);
 
-function White() {
+export function White() {
   return <meshPhysicalMaterial color="#ffffff" roughness={0.22} clearcoat={1} clearcoatRoughness={0.08} />;
 }
 
@@ -24,8 +24,8 @@ function Gloss({ color, roughness = 0.3 }: { color: string; roughness?: number }
   return <meshPhysicalMaterial color={color} roughness={roughness} clearcoat={1} clearcoatRoughness={0.1} />;
 }
 
-/** A rounded tube along straight segments, with ball joints so corners and ends stay round. */
-function Stroke({ points, radius, z, children }: { points: [number, number][]; radius: number; z: number; children: React.ReactNode }) {
+/** A rounded tube along straight segments, with ball joints so corners and ends stay round. Points are in the glyphs' 0–100 face space. */
+export function Stroke({ points, radius, z, children }: { points: [number, number][]; radius: number; z: number; children: React.ReactNode }) {
   const { path, joints } = useMemo(() => {
     const pts = points.map(([x, y]) => v3(x, y, z));
     const curve = new THREE.CurvePath<THREE.Vector3>();

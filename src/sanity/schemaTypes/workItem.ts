@@ -39,7 +39,6 @@ export const workItem = defineType({
         titleBodies("approach", "Approach"),
         titleBodies("decisions", "Engineering decisions"),
         strings("outcome", "Result"),
-        strings("stack", "Stack"),
         defineField({ name: "product", title: "Became this product", type: "reference", to: [{ type: "product" }] }),
       ],
     }),

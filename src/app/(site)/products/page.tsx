@@ -7,7 +7,7 @@ import { getProducts, getSettings } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Products",
-  description: "Brightseid Source-to-Pay and Brightseid MRP: procurement and planning platforms for growing manufacturers and distributors.",
+  description: "Brightseid Source-to-Pay and Brightseid MRP: buying and production planning software for growing manufacturers and distributors.",
   alternates: { canonical: "/products" },
 };
 
@@ -18,7 +18,7 @@ export default async function ProductsPage() {
       <PageHero
         eyebrow="Products"
         title="Platforms we build and run ourselves."
-        intro="Our own products are where we prove the engineering we sell: multi-tenant, audited, observable and fast. Both are available for a guided demo."
+        intro="Our own products are where we prove what we sell: software that is secure, reliable and quick to use. Both are available for a guided demo."
         tone="dark"
       />
       <section aria-label="All products" className="bg-ground px-4 py-24 sm:px-8 sm:py-32">
@@ -31,6 +31,15 @@ export default async function ProductsPage() {
                 <span className="mt-10 font-mono text-xs text-white/45">{p.status}</span>
                 <h2 className="mt-2 text-[clamp(1.75rem,3vw,2.5rem)] font-medium leading-tight tracking-tight">{p.name}</h2>
                 <p className="mt-3 max-w-[46ch] text-white/60">{p.tagline}</p>
+                {p.modules.length > 0 && (
+                  <ul className="mt-6 flex flex-wrap gap-1.5" aria-label={`${p.shortName} modules`}>
+                    {p.modules.map((m) => (
+                      <li key={m.id} className="panel-cell rounded-md px-2 py-1 text-[11px] text-white/65">
+                        {m.name}
+                      </li>
+                    ))}
+                  </ul>
+                )}
                 <span className="mt-8 text-sm text-[#9fb2ff] transition-colors group-hover:text-white">
                   Explore {p.shortName} <span aria-hidden="true">→</span>
                 </span>

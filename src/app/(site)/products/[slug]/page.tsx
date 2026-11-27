@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PageHero } from "@/components/sections/PageHero";
-import { ProductWalkthrough } from "@/components/sections/ProductWalkthrough";
+import { ProductScreen } from "@/components/sections/ProductScreen";
+import { ProductModules } from "@/components/sections/ProductModules";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { DemoForm } from "@/components/forms/DemoForm";
 import { BlurReveal } from "@/components/ui/BlurReveal";
@@ -41,11 +42,11 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
 
   return (
     <>
-      <PageHero eyebrow={`${product.name} · ${product.status}`} title={product.tagline} intro={product.summary} tone="dark" tiles={["api", product.tile, "queue"]}>
+      <PageHero eyebrow={`${product.name} · ${product.status}`} title={product.tagline} intro={product.summary} tone="dark" tiles={["docs", product.tile, "queue"]}>
         <a href="#demo" className="btn-light rounded-xl px-5 py-2.5 text-sm font-medium">
           Request a demo
         </a>
-        <a href={`#${product.slug}-steps`} className="panel-cell rounded-xl px-5 py-2.5 text-sm font-medium text-white/90 transition-colors hover:text-white">
+        <a href={`#${product.slug}-modules`} className="panel-cell rounded-xl px-5 py-2.5 text-sm font-medium text-white/90 transition-colors hover:text-white">
           See how it works
         </a>
       </PageHero>
@@ -68,7 +69,11 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
         </div>
       </section>
 
-      <ProductWalkthrough product={product} variant="walkthrough" />
+      <section aria-label={`${product.shortName} on screen`} className="bg-ground px-4 sm:px-8">
+        <ProductScreen product={product} className="mx-auto max-w-[1180px]" />
+      </section>
+
+      <ProductModules product={product} />
 
       <section id="demo" aria-labelledby="demo-title" className="scroll-mt-24 bg-ground px-4 pb-24 sm:px-8 sm:pb-32">
         <div className="mx-auto grid max-w-[1180px] gap-10 lg:grid-cols-[5fr_7fr] lg:gap-16">

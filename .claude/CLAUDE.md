@@ -13,7 +13,8 @@ npm run dev                    # http://localhost:3000 (studio at /studio)
 npm run build                  # production build: also the main correctness check
 npm run lint                   # eslint (flat config)
 npx tsc --noEmit               # type check; needs .next/types, so run dev or build once first
-npm run cms:seed -- --dry      # print the Sanity seed documents
+npm run cms:seed -- -- --dry   # print the Sanity seed documents (the second -- is for `sanity exec`)
+npm run cms:seed -- -- --only product,workItem   # overwrite only these document types
 npm run cms:seed               # OVERWRITES Sanity docs with src/content/seed (needs `npx sanity login`)
 npm run tiles:render           # re-render public/tiles/*.png stills (dev server must be running; uses local Chrome)
 ```
@@ -29,6 +30,8 @@ All source lives in `src/`; `@/*` maps to `./src/*`. Config files stay at the ro
 ## Architecture
 
 **Content has two sources behind one API.** Pages and components read content only through the async getters in `src/lib/content/index.ts` (server-only). If `NEXT_PUBLIC_SANITY_PROJECT_ID` is set, the getters run GROQ queries via `src/lib/cms/client.ts`. Otherwise they return the seed modules in `src/content/seed/`. Both return the types in `src/lib/content/types.ts`, and the GROQ projections in `src/lib/cms/queries.ts` must produce exactly those shapes (coalescing nulls). Adding a content field means updating: the type, the seed file, the Sanity schema in `src/sanity/schemaTypes/`, the GROQ projection, and `scripts/seed-sanity.ts` if it needs uploading. Navigation always comes from `src/content/seed/site.ts`, because it mirrors the routes.
+
+**Product walkthroughs.** Each product has a home-page journey (`steps`) and `modules`, each with its own steps. Every step names a scene from `src/lib/scenes.ts`: a small cast of actors (tiles, cards, crates, bars, badges, people, gears) with positions, labels and flows. `StepStage` draws the scene in 2D first and keeps that on reduced-motion and low-power devices; when the live layer is on, `three/StageView` draws the same scene in 3D through the shared canvas. Actors that keep their id between steps move to their new place. Copy on these pages is written for buyers, not engineers: no stack names or internals.
 
 **Caching and revalidation.** `cmsQuery` is a `"use cache"` function tagged `cms` with `cacheLife("hours")`. The Sanity webhook posts to `src/app/api/revalidate/route.ts`, which checks the signature against `SANITY_REVALIDATE_SECRET` and calls `revalidateTag("cms")`. With Cache Components enabled, uncached data access in a page has to sit inside `<Suspense>` or a cached function.
 

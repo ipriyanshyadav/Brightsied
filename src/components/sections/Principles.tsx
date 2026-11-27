@@ -9,8 +9,8 @@ type Props = { items: Principle[]; eyebrow?: string; title?: string; body?: stri
 export function Principles({
   items,
   eyebrow = "Why Brightseid",
-  title = "Engineering you can hand to the next team.",
-  body = "A small studio with big-company habits: written contracts, real tests and nothing hidden from the people paying for it.",
+  title = "Software you can rely on, and hand over with confidence.",
+  body = "A small studio with big-company habits: clear agreements, careful testing and nothing hidden from the people paying for it.",
 }: Props) {
   return (
     <section aria-labelledby="principles-title" className="bg-ground px-4 py-28 sm:px-8 sm:py-36">

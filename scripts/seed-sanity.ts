@@ -3,8 +3,12 @@
 // seed version: only re-run it on purpose. Ids use dashes: Sanity treats ids containing a
 // dot as private, so public reads would not see them.
 //
-//   npm run cms:seed            write to the dataset (needs `npx sanity login`)
-//   npm run cms:seed -- --dry   print the documents instead
+//   npm run cms:seed               write to the dataset (needs `npx sanity login`)
+//   npm run cms:seed -- -- --dry   print the documents instead
+//   npm run cms:seed -- -- --only product,workItem
+//                                  write only documents of these types, leaving the rest as edited
+//
+// The second `--` matters: `sanity exec` rejects flags it doesn't know unless they follow `--`.
 
 import { getCliClient } from "sanity/cli";
 import { settings, hero, marquee, process as steps, principles, audiences } from "../src/content/seed/site";
@@ -57,8 +61,8 @@ const docs: Doc[] = [
     ...p,
     slug: slugOf(p.slug),
     features: keyed(p.features),
-    components: keyed(p.components),
     steps: keyed(p.steps),
+    modules: keyed(p.modules.map((m) => ({ ...m, steps: keyed(m.steps) }))),
     window: { ...p.window, rows: keyed(p.window.rows) },
   })),
   ...work.map(({ caseStudy, ...w }, i) => ({
@@ -82,14 +86,25 @@ const docs: Doc[] = [
     .map((t, i) => ({ _id: `testimonial-${i}`, _type: "testimonial", order: i, ...t })),
 ];
 
+function selectedDocs() {
+  const i = process.argv.indexOf("--only");
+  if (i === -1) return docs;
+  const types = new Set((process.argv[i + 1] ?? "").split(",").filter(Boolean));
+  const known = new Set(docs.map((d) => d._type));
+  const unknown = [...types].filter((t) => !known.has(t));
+  if (types.size === 0 || unknown.length) throw new Error(`--only needs document types from: ${[...known].join(", ")}`);
+  return docs.filter((d) => types.has(d._type));
+}
+
 async function main() {
+  const chosen = selectedDocs();
   if (process.argv.includes("--dry")) {
-    console.log(JSON.stringify(docs, null, 2));
-    console.log(`\n${docs.length} documents (dry run, nothing written)`);
+    console.log(JSON.stringify(chosen, null, 2));
+    console.log(`\n${chosen.length} documents (dry run, nothing written)`);
     return;
   }
   const client = getCliClient({ apiVersion: SANITY_API_VERSION });
-  const tx = docs.reduce((t, doc) => t.createOrReplace(doc), client.transaction());
+  const tx = chosen.reduce((t, doc) => t.createOrReplace(doc), client.transaction());
   const result = await tx.commit();
   console.log(`Seeded ${result.results.length} documents into ${client.config().projectId}/${client.config().dataset}`);
 }

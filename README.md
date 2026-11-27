@@ -49,7 +49,7 @@ The Sanity command line needs **Node 22.12 or newer** (the site itself runs on N
 1. Create a free project at [sanity.io/manage](https://www.sanity.io/manage) and a dataset named `production`.
 2. In the project's **API → CORS origins**, add `http://localhost:3000` and your live URL, with credentials allowed. The embedded Studio needs both.
 3. Put the project id in `.env` as `NEXT_PUBLIC_SANITY_PROJECT_ID`.
-4. Run `npx sanity login` (or put a personal token in `SANITY_AUTH_TOKEN`), then `npm run cms:seed` to copy `src/content/seed/` into the dataset. Use `npm run cms:seed -- --dry` to preview it first. The seed overwrites documents with the same ids, so only re-run it on purpose.
+4. Run `npx sanity login` (or put a personal token in `SANITY_AUTH_TOKEN`), then `npm run cms:seed` to copy `src/content/seed/` into the dataset. Use `npm run cms:seed -- -- --dry` to preview it first, and `-- -- --only product,workItem` to overwrite only some document types. The seed overwrites documents with the same ids, so only re-run it on purpose.
 5. Restart the site and open `/studio`.
 6. In **API → Webhooks**, add a webhook:
    - URL: `https://<your-domain>/api/revalidate`

@@ -31,11 +31,12 @@ export const packagesQuery = `*[_type == "engagementPackage"] | order(order asc)
   "slug": slug.current, name, duration, summary, ${list("includes")}
 }`;
 
+const step = `{ title, body, scene }`;
 const product = `{
   "slug": slug.current, name, shortName, tile, tagline, summary, status,
-  ${list("audience")}, ${pairs("features")}, ${list("rules")}, ${list("stack")},
-  "components": coalesce(components[]{ id, label }, []), auditLabel,
-  "steps": coalesce(steps[]{ title, body, "lit": coalesce(lit, []), event }, []),
+  ${list("audience")}, ${pairs("features")}, ${list("rules")},
+  "steps": coalesce(steps[]${step}, []),
+  "modules": coalesce(modules[]{ id, name, summary, "steps": coalesce(steps[]${step}, []) }, []),
   "window": window{ path, ${list("sidebar")}, activeItem, title, action, columns, "rows": coalesce(rows[]{ id, item, qty, state, tone }, []) }
 }`;
 export const productsQuery = `*[_type == "product"] | order(order asc) ${product}`;
@@ -45,7 +46,7 @@ export const workQuery = `*[_type == "workItem"] | order(order asc) {
   "slug": slug.current, kind, tab, title, where, body, ${list("points")}, ${list("tags")}, tiles, href,
   "caseStudy": select(defined(caseStudy.challenge) => caseStudy{
     ${s("client")}, ${s("role")}, challenge, ${pairs("approach")}, ${pairs("decisions")},
-    ${list("outcome")}, ${list("stack")}, "product": product->slug.current
+    ${list("outcome")}, "product": product->slug.current
   })
 }`;
 

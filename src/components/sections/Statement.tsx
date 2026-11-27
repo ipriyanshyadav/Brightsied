@@ -5,11 +5,11 @@ import { gsap, SplitText, useGSAP } from "@/lib/gsap";
 import { GlossyTile, type TileKind } from "@/components/ui/GlossyTile";
 
 const steps: { kind: TileKind; label: string }[] = [
-  { kind: "docs", label: "spec" },
+  { kind: "docs", label: "plan" },
   { kind: "db", label: "data" },
   { kind: "api", label: "build" },
   { kind: "agents", label: "ai" },
-  { kind: "terminal", label: "ship" },
+  { kind: "terminal", label: "launch" },
 ];
 
 function Slot({ i }: { i: number }) {
@@ -112,9 +112,9 @@ export function Statement() {
       <div ref={stage} className="stage relative overflow-hidden px-4 py-24 data-[anim=on]:h-[100svh] data-[anim=on]:py-0">
         {/* A heading, not a <p>: SplitText labels the element with aria-label, which <p> can't carry. */}
         <h2 className="stmt mx-auto max-w-[23ch] text-center text-statement font-medium in-data-[anim=on]:pt-[24vh]">
-          We start from a <Slot i={0} /> written spec, model the <Slot i={1} /> data,
-          build the <Slot i={2} /> product, add <Slot i={3} /> AI where it earns its place
-          and <Slot i={4} /> ship it to production.
+          We start from a <Slot i={0} /> written plan, organise your <Slot i={1} /> data,
+          build the <Slot i={2} /> product, add <Slot i={3} /> AI where it helps
+          and <Slot i={4} /> launch it to real users.
         </h2>
 
         <div className="pipeline-card panel-3d mx-auto mt-16 w-full max-w-[1120px] rounded-[28px] p-4 text-white sm:p-6 in-data-[anim=on]:absolute in-data-[anim=on]:inset-x-0 in-data-[anim=on]:top-[calc(54%-150px)] in-data-[anim=on]:mt-0 in-data-[anim=on]:w-[min(1120px,92vw)]">
@@ -122,9 +122,9 @@ export function Statement() {
             <span className="grid h-9 w-9 place-items-center rounded-xl bg-[linear-gradient(180deg,#5b7bff,#2f4ae0)] shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_0_0_1px_#1a2b94,0_6px_16px_-4px_rgba(59,91,255,0.7)]" aria-hidden="true">
               <svg width="10" height="12" viewBox="0 0 10 12"><rect width="3" height="12" rx="1" fill="#fff" /><rect x="7" width="3" height="12" rx="1" fill="#fff" /></svg>
             </span>
-            <span className="font-mono text-white/90">project.ship</span>
-            <span className="font-mono text-white/40">week 01 / 10</span>
-            <span className="panel-cell ml-auto hidden rounded-lg px-2.5 py-1 font-mono text-white/60 sm:inline">5 stages</span>
+            <span className="text-white/90">Your project</span>
+            <span className="text-white/40">Week 1 of 10</span>
+            <span className="panel-cell ml-auto hidden rounded-lg px-2.5 py-1 text-white/60 sm:inline">5 stages</span>
           </div>
           <div className="relative mt-4 hidden h-6 items-center justify-between font-mono text-[11px] text-white/40 sm:flex" aria-hidden="true">
             {Array.from({ length: 8 }, (_, i) => (

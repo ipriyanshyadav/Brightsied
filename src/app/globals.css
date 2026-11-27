@@ -411,6 +411,24 @@ body::after {
   opacity: 0;
 }
 
+/* Product step stages (StepStage.tsx): flows march along their paths, gears turn */
+.stage-flow {
+  animation: stage-flow 1.2s linear infinite;
+}
+@keyframes stage-flow {
+  to {
+    stroke-dashoffset: -22;
+  }
+}
+.stage-spin {
+  animation: stage-spin 9s linear infinite;
+}
+@keyframes stage-spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
 /* Hero tiles can be grabbed and thrown (HeroScene.tsx), though the canvas itself ignores the pointer */
 [data-grab="hover"],
 [data-grab="hover"] * {

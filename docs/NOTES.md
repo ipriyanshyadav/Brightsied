@@ -1,6 +1,6 @@
 # Brightseid website: notes and open items
 
-Last updated: 26 November 2026. For how the site works and how to run it, see `../README.md`.
+Last updated: 27 November 2026. For how the site works and how to run it, see `../README.md`.
 
 ## Where things stand
 
@@ -17,6 +17,13 @@ Last updated: 26 November 2026. For how the site works and how to run it, see `.
   - All live pages return 200; unknown pages return 404.
   - A live edit refreshed the site through Sanity's real webhook in about 6 seconds, and a forged webhook signature was rejected.
   - Lighthouse (mobile, local build): home 89, inner pages 91–94. Best practices and SEO 100 on every page; accessibility 96–100.
+
+## Product modules: going live (27 Nov)
+
+The product pages now show 8 modules each, with a 3D scene for every step, and the copy across the site is written for buyers instead of engineers. The new content is in `src/content/seed/` but not yet in Sanity. Run these two steps close together, because the old site can't show the new content and the new site can't show the old content:
+
+1. Push the code to `main` (Vercel deploys it).
+2. Run `npm run cms:seed -- -- --only product,workItem,homePage`. This overwrites only the products, work items and home page in Sanity; site settings, services and packages are left alone. Those documents had no Studio edits on 27 Nov, so nothing is lost.
 
 ## When the domain is bought
 
@@ -45,8 +52,10 @@ Last updated: 26 November 2026. For how the site works and how to run it, see `.
 - [ ] **Privacy policy and Terms:** plain-language drafts for India's DPDP Act 2023. **Get them reviewed by a lawyer before launch.**
 - [ ] **Engagement package names and durations,** for example "MVP Build, 6–10 weeks".
 - [ ] **The promise "We reply within one working day."**
-- [ ] **The S2P and MRP case studies, and the MRP feature descriptions.**
+- [ ] **The S2P and MRP case studies, and the product feature descriptions.**
+- [ ] **Product modules (8 per product) and their steps.** They are written as if every module is built, at your request. Make sure a demo can show each one before a buyer asks.
 - [ ] **Product statuses:** both read "Demo available". Make sure you can actually give demos.
+- [ ] **Still technical, by choice:** the services pages, the home tech marquee, and the service cards and packages on the home page (they share text with the services pages).
 - [ ] **Hero headline and tagline.**
 
 ## Security housekeeping

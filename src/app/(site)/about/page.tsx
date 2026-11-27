@@ -8,7 +8,7 @@ import { getHome, getSettings } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "Brightseid is a software engineering studio in Gurgaon that builds products, backends and AI systems for startups, growing businesses and agencies.",
+  description: "Brightseid is a software studio in Gurgaon that builds products, business software and AI for startups, growing businesses and agencies.",
   alternates: { canonical: "/about" },
 };
 
@@ -18,7 +18,7 @@ export default async function AboutPage() {
     <>
       <PageHero
         eyebrow="About"
-        title="A small studio with production habits."
+        title="A small studio with big-company habits."
         intro={`${site.name} is a software engineering studio based in ${site.location}. We plan, build and run software for teams that need it to work on day one and keep working on day one thousand.`}
         tiles={["docs", "agents", "terminal"]}
       />

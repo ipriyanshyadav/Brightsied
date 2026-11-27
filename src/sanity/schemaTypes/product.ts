@@ -1,7 +1,28 @@
 import { defineArrayMember, defineField, defineType, type ArrayRule } from "sanity";
+import { SCENE_KEYS } from "@/lib/scenes";
 import { order, required, slug, strings, text, tile, titleBodies } from "./fields";
 
 const TONES = ["neutral", "amber", "mint", "blue"];
+
+/** Steps that each play a scene beside them (lib/scenes.ts). */
+const walkthrough = (name: string, title: string, description?: string) =>
+  defineField({
+    name,
+    title,
+    description,
+    type: "array",
+    of: [
+      defineArrayMember({
+        type: "object",
+        fields: [
+          required("title", "Title"),
+          text("body", "Body"),
+          required("scene", "Scene", "string", { description: "The picture shown beside this step.", options: { list: SCENE_KEYS, layout: "dropdown" } }),
+        ],
+        preview: { select: { title: "title", subtitle: "scene" } },
+      }),
+    ],
+  });
 
 export const product = defineType({
   name: "product",
@@ -19,28 +40,21 @@ export const product = defineType({
     strings("audience", "Made for"),
     titleBodies("features", "Features"),
     strings("rules", "Guarantees"),
-    strings("stack", "Stack"),
+    walkthrough("steps", "Home page journey", "The end-to-end story shown when this product is featured on the home page."),
     defineField({
-      name: "components",
-      title: "Diagram components",
-      type: "array",
-      of: [defineArrayMember({ type: "object", fields: [required("id", "Id"), required("label", "Label")], preview: { select: { title: "label", subtitle: "id" } } })],
-    }),
-    required("auditLabel", "Audit lane label", "string"),
-    defineField({
-      name: "steps",
-      title: "Walkthrough steps",
+      name: "modules",
+      title: "Modules",
       type: "array",
       of: [
         defineArrayMember({
           type: "object",
           fields: [
-            required("title", "Title"),
-            text("body", "Body"),
-            strings("lit", "Lit components", { description: "Component ids (or “audit”) highlighted in this step." }),
-            required("event", "Event name", "string", { description: "e.g. po.approved" }),
+            required("id", "Anchor id", "string", { description: "Lower case with dashes, e.g. invoice-matching. Used in links to the module." }),
+            required("name", "Name"),
+            required("summary", "One-line summary", "string"),
+            walkthrough("steps", "Steps"),
           ],
-          preview: { select: { title: "title", subtitle: "event" } },
+          preview: { select: { title: "name", subtitle: "summary" } },
         }),
       ],
     }),

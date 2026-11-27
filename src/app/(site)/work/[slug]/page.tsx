@@ -56,7 +56,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
         <h2 id="cs-facts" className="sr-only">
           At a glance
         </h2>
-        <dl className="mx-auto grid max-w-[1180px] gap-4 sm:grid-cols-3">
+        <dl className="mx-auto grid max-w-[1180px] gap-4 sm:grid-cols-2">
           <div className="card-soft rounded-[24px] p-6">
             <dt className="eyebrow">For</dt>
             <dd className="mt-3 text-lg font-medium tracking-tight">{cs.client}</dd>
@@ -64,16 +64,6 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
           <div className="card-soft rounded-[24px] p-6">
             <dt className="eyebrow">Our role</dt>
             <dd className="mt-3 text-lg font-medium tracking-tight">{cs.role}</dd>
-          </div>
-          <div className="card-soft rounded-[24px] p-6">
-            <dt className="eyebrow">Built with</dt>
-            <dd className="mt-3 flex flex-wrap gap-1.5">
-              {cs.stack.map((t) => (
-                <span key={t} className="glass rounded-md px-2 py-1 font-mono text-[11px] text-ink/70">
-                  {t}
-                </span>
-              ))}
-            </dd>
           </div>
         </dl>
       </section>
@@ -110,7 +100,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
 
       <section aria-labelledby="cs-decisions" className="px-4 pb-20 sm:px-8 sm:pb-28">
         <div className="panel-3d mx-auto max-w-[1180px] rounded-[32px] p-6 text-white sm:p-12">
-          <p className="eyebrow text-white/45">Engineering decisions</p>
+          <p className="eyebrow text-white/45">Key decisions</p>
           <h2 id="cs-decisions" className="mt-4 max-w-[24ch] text-section font-medium">
             The choices that keep it dependable.
           </h2>
@@ -147,7 +137,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
       <CtaBand
         site={site}
         title="Want something built like this?"
-        body="We bring the same approach to client work: a clear model of the problem, the boring reliability decisions made early, and software you own."
+        body="We bring the same approach to client work: a clear understanding of the problem, the reliability decisions made early, and software you own."
       />
       <JsonLd data={articleLd} />
     </>

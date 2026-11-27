@@ -65,9 +65,18 @@ export type EngagementPackage = {
 export type ProductStep = {
   title: string;
   body: string;
-  /** Ids of the components (and "audit") lit up in the diagram for this step. */
-  lit: string[];
-  event: string;
+  /** Key of the scene played beside the step (lib/scenes.ts). */
+  scene: string;
+};
+
+/** One sellable part of a product, explained in a few steps. */
+export type ProductModule = {
+  /** Also the page anchor, e.g. /products/s2p#invoice-matching. */
+  id: string;
+  name: string;
+  /** One plain line for the module card. */
+  summary: string;
+  steps: ProductStep[];
 };
 
 export type Product = {
@@ -81,10 +90,9 @@ export type Product = {
   audience: string[];
   features: { title: string; body: string }[];
   rules: string[];
-  stack: string[];
-  components: { id: string; label: string }[];
-  auditLabel: string;
+  /** The end-to-end journey, shown when the product is featured on the home page. */
   steps: ProductStep[];
+  modules: ProductModule[];
   /** Illustrative app window; sample data, labelled as such on the page. */
   window: {
     path: string;
@@ -122,7 +130,6 @@ export type CaseStudy = {
   decisions: { title: string; body: string }[];
   /** Plain statements of what exists today. No invented metrics. */
   outcome: string[];
-  stack: string[];
   /** Slug of a Brightseid product this work became, for the demo call to action. */
   product?: string;
 };

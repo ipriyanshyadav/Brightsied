@@ -34,7 +34,7 @@ export const nav: NavItem[] = [
 
 export const hero: Hero = {
   title: ["Software that ships.", "AI that holds up."],
-  sub: "Brightseid is an engineering studio in Gurgaon. We plan, design, build and run products, backends and AI systems, from the first spec to production.",
+  sub: "Brightseid is a software studio in Gurgaon. We plan, design, build and run software and AI for growing businesses, from the first idea to launch and beyond.",
 };
 
 export const marquee = [
@@ -59,52 +59,52 @@ export const marquee = [
 export const process: ProcessStep[] = [
   {
     title: "Discover",
-    body: "We start with your users, your constraints and the decision the software has to support, then agree scope in writing.",
+    body: "We start with your users, your goals and your budget, then agree the scope in writing.",
   },
   {
     title: "Design",
-    body: "Contracts first: data models, API specs and screens agreed before a line of production code.",
+    body: "Screens, data and how everything fits together are agreed with you before building starts, so there are no surprises.",
   },
   {
     title: "Build",
-    body: "Typed services, migrations and tests from day one, with AI wired in behind validation and retries.",
+    body: "We build in small steps and show you working software every week, with AI added only where it helps.",
   },
   {
-    title: "Ship & support",
-    body: "Deployed, monitored and documented, then handed over or run with you as the product grows.",
+    title: "Launch & support",
+    body: "We launch, keep watch and fix issues fast, then hand it over or keep running it with you as you grow.",
   },
 ];
 
 export const principles: Principle[] = [
   {
-    title: "Contracts before code",
-    body: "Specs, schemas and API contracts are written and agreed first, so estimates mean something and nothing is a surprise.",
+    title: "Agreed before we build",
+    body: "Scope, screens and costs are written down and agreed first, so estimates mean something and nothing is a surprise.",
   },
   {
-    title: "Production from day one",
-    body: "Tests, migrations, logging and tracing ship with the first feature, not as a clean-up phase at the end.",
+    title: "Built to last from day one",
+    body: "Testing, backups and monitoring come with the very first feature, not as a clean-up at the end.",
   },
   {
     title: "You own everything",
-    body: "Code, cloud accounts, data and documentation live in your name. No lock-in and no hostage repos.",
+    body: "The code, accounts, data and documents are in your name. No lock-in and no strings attached.",
   },
   {
-    title: "Talk to the engineer",
-    body: "No account managers in the middle. You speak directly with the person designing and building your system.",
+    title: "Talk to the people building it",
+    body: "No account managers in the middle. You speak directly with the people designing and building your software.",
   },
 ];
 
 export const audiences: Audience[] = [
   {
     title: "Startups and founders",
-    body: "An MVP, a platform rebuild or an AI feature, scoped tightly and shipped to real users fast.",
+    body: "A first version of your product, a rebuild or an AI feature, scoped tightly and launched to real users fast.",
   },
   {
     title: "Growing businesses",
-    body: "Internal tools and workflows for procurement, operations and planning that replace spreadsheets for good.",
+    body: "Software for purchasing, operations and planning that replaces spreadsheets for good.",
   },
   {
     title: "Agencies",
-    body: "Backend and AI engineering delivered under your brand, for clients who need more than a front end.",
+    body: "Software and AI work delivered under your brand, for clients who need more than a website.",
   },
 ];

@@ -4,39 +4,53 @@ import { LiveTile } from "@/components/ui/LiveTile";
 import { BlurReveal } from "@/components/ui/BlurReveal";
 import { Tilt } from "@/components/ui/Tilt";
 
-function DesignVisual() {
-  const rows = [
-    ["GET", "/rfqs", "#6f9cff"],
-    ["POST", "/rfqs/{id}/bids", "#1fbf86"],
-    ["PATCH", "/pos/{id}/approve", "#f59e0b"],
-    ["GET", "/invoices/{id}/match", "#6f9cff"],
-    ["POST", "/vendors", "#1fbf86"],
+// A written scope, ticked off together.
+function DiscoverVisual() {
+  const rows: [string, string][] = [
+    ["Who will use it", "#1fbf86"],
+    ["What it must do", "#1fbf86"],
+    ["Budget and timeline", "#1fbf86"],
+    ["What success looks like", "#6f9cff"],
   ];
   return (
     <div className="panel-3d flex h-full flex-col justify-center gap-2 p-5">
-      {rows.map(([m, p, c]) => (
-        <div key={p} className="panel-cell flex items-center gap-3 rounded-lg px-3 py-2 font-mono text-[11px] text-white/80">
-          <span className="w-10 font-semibold" style={{ color: c, textShadow: `0 0 10px ${c}88` }}>{m}</span>
-          <span className="truncate">{p}</span>
+      <p className="px-1 pb-1 text-[11px] text-white/45">Scope, agreed in writing</p>
+      {rows.map(([label, c]) => (
+        <div key={label} className="panel-cell flex items-center gap-3 rounded-lg px-3 py-2 text-[12px] text-white/80">
+          <span className="grid h-4 w-4 shrink-0 place-items-center rounded-full" style={{ background: c, boxShadow: `0 0 10px ${c}88` }}>
+            <svg width="8" height="8" viewBox="0 0 8 8" fill="none" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M1.5 4.2l1.7 1.7L6.5 2.4" />
+            </svg>
+          </span>
+          <span className="truncate">{label}</span>
         </div>
       ))}
     </div>
   );
 }
 
-function BuildVisual() {
+// Screens sketched and agreed before anything is built.
+function DesignVisual() {
   return (
     <div className="card-soft flex h-full items-center justify-center p-5">
-      <pre className="panel-3d w-full overflow-hidden rounded-xl p-4 font-mono text-[11px] leading-relaxed text-white/70">
-        <span className="text-[#9fb2ff]">@router.post</span>(<span className="text-[#ffd38a]">&quot;/pos/{"{id}"}/approve&quot;</span>)
-        {"\n"}<span className="text-[#ff9f8a]">async def</span> approve(
-        {"\n"}  id: UUID,
-        {"\n"}  user: Checker = Depends(...),
-        {"\n"}):
-        {"\n"}  po = <span className="text-[#ff9f8a]">await</span> repo.get(id)
-        {"\n"}  po.approve(by=user)
-        {"\n"}  <span className="text-[#ff9f8a]">await</span> audit.log(po)
-      </pre>
+      <div className="panel-3d flex w-full flex-col gap-2.5 rounded-xl p-4">
+        <div className="flex items-center gap-2">
+          <span className="h-2.5 w-10 rounded-full bg-white/70" />
+          <span className="ml-auto h-5 w-14 rounded-md bg-[linear-gradient(180deg,#5b7bff,#2f4ae0)] shadow-[0_0_12px_-2px_rgba(59,91,255,0.7)]" />
+        </div>
+        <div className="grid grid-cols-3 gap-2">
+          {["#1fbf86", "#f59e0b", "#6f9cff"].map((c) => (
+            <span key={c} className="panel-cell flex h-12 flex-col justify-end rounded-lg p-2">
+              <span className="h-1.5 w-2/3 rounded-full" style={{ background: c }} />
+            </span>
+          ))}
+        </div>
+        {[90, 70, 80].map((w) => (
+          <span key={w} className="panel-cell flex h-6 items-center rounded-md px-2">
+            <span className="h-1.5 rounded-full bg-white/25" style={{ width: `${w}%` }} />
+          </span>
+        ))}
+      </div>
     </div>
   );
 }
@@ -55,11 +69,11 @@ function IntegrateVisual() {
 
 function ShipVisual() {
   const chips: [string, string, string][] = [
-    ["K3s", "#1fbf86", "-6deg"],
-    ["Jaeger", "#3b5bff", "4deg"],
-    ["Grafana", "#f59e0b", "-3deg"],
-    ["Loki", "#ff5a3c", "7deg"],
-    ["Kong", "#7c4dff", "-8deg"],
+    ["Live", "#1fbf86", "-6deg"],
+    ["Secure", "#3b5bff", "4deg"],
+    ["Backed up", "#f59e0b", "-3deg"],
+    ["Watched", "#ff5a3c", "7deg"],
+    ["Supported", "#7c4dff", "-8deg"],
   ];
   return (
     <div className="card-soft flex h-full flex-wrap content-center items-center justify-center gap-x-2 gap-y-3 p-5">
@@ -76,7 +90,7 @@ function ShipVisual() {
   );
 }
 
-const visuals = [<DesignVisual key="d" />, <BuildVisual key="b" />, <IntegrateVisual key="i" />, <ShipVisual key="s" />];
+const visuals = [<DiscoverVisual key="d" />, <DesignVisual key="s" />, <IntegrateVisual key="b" />, <ShipVisual key="l" />];
 
 export function Process({ steps }: { steps: ProcessStep[] }) {
   return (
@@ -85,10 +99,10 @@ export function Process({ steps }: { steps: ProcessStep[] }) {
         <p className="eyebrow">How we engage</p>
         <div className="mt-4 flex flex-wrap items-end justify-between gap-6">
           <BlurReveal id="process-title" className="max-w-[20ch] text-section font-medium">
-            From first conversation to production, one team.
+            From first conversation to launch, one team.
           </BlurReveal>
           <Link href="/services#packages" className="btn-light rounded-xl px-4 py-2 text-sm font-medium">
-            See engagement models
+            See ways to work with us
           </Link>
         </div>
 
