@@ -26,7 +26,7 @@ export const settings: SiteSettings = {
 
 export const nav: NavItem[] = [
   { label: "Services", href: "/services", note: "Product builds, embedded engineers, AI and audits" },
-  { label: "Products", href: "/products", note: "Source-to-Pay and MRP platforms" },
+  { label: "Products", href: "/products", note: "Purchasing, manufacturing, logistics and education software" },
   { label: "Work", href: "/work", note: "What we've built" },
   { label: "About", href: "/about", note: "How we work and who we work with" },
   { label: "Contact", href: "/contact", note: "Tell us about your project" },

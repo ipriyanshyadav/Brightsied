@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { PageHero } from "@/components/sections/PageHero";
 import { ProductScreen } from "@/components/sections/ProductScreen";
 import { ProductModules } from "@/components/sections/ProductModules";
+import { ProductEditions } from "@/components/sections/ProductEditions";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { DemoForm } from "@/components/forms/DemoForm";
 import { BlurReveal } from "@/components/ui/BlurReveal";
@@ -40,9 +41,12 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
     publisher: { "@type": "Organization", name: site.name, url: site.url },
   };
 
+  // The product's tile in the middle, flanked by two others that differ from it.
+  const [left, right] = (["docs", "queue", "audit"] as const).filter((k) => k !== product.tile);
+
   return (
     <>
-      <PageHero eyebrow={`${product.name} · ${product.status}`} title={product.tagline} intro={product.summary} tone="dark" tiles={["docs", product.tile, "queue"]}>
+      <PageHero eyebrow={`${product.name} · ${product.status}`} title={product.tagline} intro={product.summary} tone="dark" tiles={[left, product.tile, right]}>
         <a href="#demo" className="btn-light rounded-xl px-5 py-2.5 text-sm font-medium">
           Request a demo
         </a>
@@ -72,6 +76,8 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
       <section aria-label={`${product.shortName} on screen`} className="bg-ground px-4 sm:px-8">
         <ProductScreen product={product} className="mx-auto max-w-[1180px]" />
       </section>
+
+      <ProductEditions product={product} />
 
       <ProductModules product={product} />
 

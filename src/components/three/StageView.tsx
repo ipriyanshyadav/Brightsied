@@ -33,6 +33,8 @@ const PACKET_COLOR = "#7f9bff";
 /** Cards and badges turn slightly, like the tiles, so they read as solid objects. */
 const FLAT_POSE: [number, number] = [STILL_POSE[0] * 0.6, STILL_POSE[1] * 0.6];
 const CRATE_POSE: [number, number] = [0.42, -0.62];
+/** Three-quarter view, so the lorry reads as a vehicle rather than a flat side. */
+const TRUCK_POSE: [number, number] = [0.2, -0.5];
 const BODY_DEPTH = 0.4;
 const LINE_GREY = "#d5d8df";
 
@@ -66,6 +68,7 @@ const ICONS: Record<NonNullable<CastMember["icon"]>, [number, number][][]> = {
   alert: [[[50, 26], [50, 56]]],
   lock: [[[38, 50], [38, 36], [62, 36], [62, 50]]],
   clock: [[[50, 32], [50, 52], [63, 60]]],
+  pin: [[[50, 78], [36, 52], [34, 40], [39, 30], [50, 25], [61, 30], [66, 40], [64, 52], [50, 78]]],
 };
 
 function Badge({ tone, icon }: { tone: TileKind; icon: CastMember["icon"] }) {
@@ -93,6 +96,12 @@ function Badge({ tone, icon }: { tone: TileKind; icon: CastMember["icon"] }) {
           <White />
         </RoundedBox>
       )}
+      {icon === "pin" && (
+        <mesh position={[0, 0.09, face]}>
+          <sphereGeometry args={[0.06, 16, 12]} />
+          <White />
+        </mesh>
+      )}
       {icon === "clock" && (
         <mesh position={[0, 0, face]}>
           <torusGeometry args={[0.3, 0.04, 12, 48]} />
@@ -113,6 +122,60 @@ function Person({ tone }: { tone: TileKind }) {
       <RoundedBox args={[1, 0.68, 0.5]} radius={0.22} smoothness={5} position={[0, -0.28, 0]}>
         <Body tone={tone} />
       </RoundedBox>
+    </group>
+  );
+}
+
+const TYRE = "#2a2a30";
+const SCREEN_FRAME = "#1c1c21";
+
+/** A lorry facing right, one unit long: white box body, coloured cab, three wheels. */
+function Truck({ tone }: { tone: TileKind }) {
+  return (
+    <group>
+      <RoundedBox args={[0.68, 0.48, 0.42]} radius={0.05} smoothness={4} position={[-0.16, 0.07, 0]}>
+        <meshPhysicalMaterial color="#ffffff" roughness={0.3} clearcoat={1} clearcoatRoughness={0.1} />
+      </RoundedBox>
+      <RoundedBox args={[0.5, 0.07, 0.03]} radius={0.02} smoothness={3} position={[-0.16, 0.05, 0.215]}>
+        <Body tone={tone} />
+      </RoundedBox>
+      <RoundedBox args={[0.28, 0.35, 0.4]} radius={0.07} smoothness={4} position={[0.35, 0, 0]}>
+        <Body tone={tone} />
+      </RoundedBox>
+      <RoundedBox args={[0.13, 0.12, 0.02]} radius={0.02} smoothness={3} position={[0.38, 0.07, 0.205]}>
+        <White />
+      </RoundedBox>
+      {[-0.34, 0.02, 0.34].flatMap((x) =>
+        [-0.17, 0.17].map((z) => (
+          <mesh key={`${x}${z}`} position={[x, -0.2, z]} rotation={[Math.PI / 2, 0, 0]}>
+            <cylinderGeometry args={[0.1, 0.1, 0.08, 24]} />
+            <meshStandardMaterial color={TYRE} roughness={0.7} />
+          </mesh>
+        )),
+      )}
+    </group>
+  );
+}
+
+/** A phone, one unit wide: dark frame, white screen with a coloured header and lines. */
+function Phone({ tone }: { tone: TileKind }) {
+  return (
+    <group>
+      <RoundedBox args={[1, 1.9, 0.12]} radius={0.12} smoothness={4}>
+        <meshPhysicalMaterial color={SCREEN_FRAME} roughness={0.25} clearcoat={1} clearcoatRoughness={0.06} />
+      </RoundedBox>
+      <RoundedBox args={[0.86, 1.72, 0.02]} radius={0.08} smoothness={3} position={[0, 0, 0.06]}>
+        <meshPhysicalMaterial color="#ffffff" roughness={0.3} clearcoat={1} clearcoatRoughness={0.1} />
+      </RoundedBox>
+      <RoundedBox args={[0.7, 0.3, 0.03]} radius={0.04} smoothness={3} position={[0, 0.6, 0.08]}>
+        <Body tone={tone} />
+      </RoundedBox>
+      {[0.62, 0.44, 0.54, 0.36].map((w, i) => (
+        <mesh key={i} position={[-0.35 + w / 2, 0.24 - i * 0.2, 0.075]}>
+          <boxGeometry args={[w, 0.06, 0.02]} />
+          <meshStandardMaterial color={LINE_GREY} roughness={0.6} />
+        </mesh>
+      ))}
     </group>
   );
 }
@@ -166,6 +229,10 @@ function Shape({ a }: { a: CastMember }) {
       return <Person tone={a.tone} />;
     case "gear":
       return <Gear tone={a.tone} />;
+    case "truck":
+      return <Truck tone={a.tone} />;
+    case "phone":
+      return <Phone tone={a.tone} />;
   }
 }
 
@@ -176,6 +243,7 @@ function restingPose(a: CastMember): [number, number] {
   if (a.type === "tile") return [STILL_POSE[0], STILL_POSE[1]];
   if (a.type === "crate") return CRATE_POSE;
   if (a.type === "bar") return [0.12, -0.35];
+  if (a.type === "truck") return TRUCK_POSE;
   return FLAT_POSE;
 }
 

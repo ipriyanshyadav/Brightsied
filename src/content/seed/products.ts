@@ -1,4 +1,6 @@
 import type { Product } from "@/lib/content/types";
+import { institute } from "./institute";
+import { logistics } from "./logistics";
 
 // Written for the people who run purchasing and planning, not for engineers. Each step's
 // scene is a key into lib/scenes.ts.
@@ -231,6 +233,7 @@ export const products: Product[] = [
         ],
       },
     ],
+    editions: [],
     window: {
       path: "source-to-pay / quotes",
       sidebar: ["Purchase requests", "Quotes", "Bids", "Quote comparison", "Purchase orders", "Invoices", "Vendors", "History"],
@@ -474,6 +477,7 @@ export const products: Product[] = [
         ],
       },
     ],
+    editions: [],
     window: {
       path: "mrp / suggested-orders",
       sidebar: ["Items", "Product recipes", "Demand", "Planning runs", "Suggested orders", "Needs attention", "Machines", "History"],
@@ -489,4 +493,6 @@ export const products: Product[] = [
       ],
     },
   },
+  logistics,
+  institute,
 ];

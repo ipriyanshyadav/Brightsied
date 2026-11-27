@@ -43,7 +43,46 @@ const icons: Record<BadgeIcon, React.ReactNode> = {
       <path d="M12 8.5V12l2.5 1.6" />
     </>
   ),
+  pin: (
+    <>
+      <path d="M12 18.5s-4.8-4.4-4.8-8.2a4.8 4.8 0 019.6 0c0 3.8-4.8 8.2-4.8 8.2z" />
+      <circle cx="12" cy="10.3" r="1.4" />
+    </>
+  ),
 };
+
+const PAPER = "bg-[linear-gradient(180deg,#fff,#eceef2)] shadow-[0_10px_24px_-10px_rgb(0_0_0/0.35),inset_0_1px_0_#fff]";
+
+/** A lorry facing right: a white box body, a coloured cab and three wheels. */
+function Truck({ fill, shadow }: { fill: string; shadow: string }) {
+  return (
+    <span className="relative block h-full w-full">
+      <span className={`absolute left-0 top-0 h-[78%] w-[68%] rounded-[10%/14%] ${PAPER}`}>
+        <span className="absolute inset-x-[10%] top-[42%] h-[14%] rounded-full" style={{ background: fill }} />
+      </span>
+      <span className="absolute right-0 top-[22%] h-[56%] w-[29%] rounded-[16%_34%_12%_12%]" style={{ background: fill, boxShadow: shadow }}>
+        <span className="absolute right-[14%] top-[14%] h-[34%] w-[46%] rounded-[3px_8px_3px_3px] bg-white/85" />
+      </span>
+      {[16, 52, 84].map((x) => (
+        <span key={x} className="absolute bottom-0 aspect-square w-[17%] -translate-x-1/2 rounded-full border-[3cqi] border-[#2a2a30] bg-[#d5d8df]" style={{ left: `${x}%` }} />
+      ))}
+    </span>
+  );
+}
+
+/** A phone: dark frame, a white screen with a coloured header and a few lines. */
+function Phone({ fill }: { fill: string }) {
+  return (
+    <span className="flex h-full w-full rounded-[18%/9%] bg-[linear-gradient(160deg,#55555e,#16161a)] p-[7%] shadow-[0_12px_24px_-10px_rgb(0_0_0/0.5)]">
+      <span className="flex w-full flex-col gap-[5%] rounded-[12%/6%] bg-white p-[12%]">
+        <span className="h-[18%] rounded-[4px]" style={{ background: fill }} />
+        {[90, 64, 78, 52].map((w) => (
+          <span key={w} className="h-[4%] rounded-full bg-[#d5d8df]" style={{ width: `${w}%` }} />
+        ))}
+      </span>
+    </span>
+  );
+}
 
 function Gear({ a }: { a: CastMember }) {
   const p = palettes[a.tone];
@@ -77,7 +116,7 @@ function Shape({ a }: { a: CastMember }) {
       return <GlossyTile kind={a.tone} sizes="160px" className="h-full w-full" />;
     case "card":
       return (
-        <span className="flex h-full w-full flex-col gap-[7%] rounded-[12%/9%] bg-[linear-gradient(180deg,#fff,#eceef2)] p-[9%] shadow-[0_10px_24px_-10px_rgb(0_0_0/0.35),inset_0_1px_0_#fff]">
+        <span className={`flex h-full w-full flex-col gap-[7%] rounded-[12%/9%] p-[9%] ${PAPER}`}>
           <span className="h-[20%] rounded-[6px]" style={{ background: fill }} />
           {[82, 60, 72].map((w) => (
             <span key={w} className="h-[6%] rounded-full bg-[#d5d8df]" style={{ width: `${w}%` }} />
@@ -105,6 +144,10 @@ function Shape({ a }: { a: CastMember }) {
       );
     case "gear":
       return <Gear a={a} />;
+    case "truck":
+      return <Truck fill={fill} shadow={shadow} />;
+    case "phone":
+      return <Phone fill={fill} />;
   }
 }
 

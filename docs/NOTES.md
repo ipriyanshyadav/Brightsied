@@ -31,6 +31,17 @@ Checks on the live site after release (27 Nov, headless Chrome):
 - Not tested: Safari and Firefox (Safari needs Develop → Allow Remote Automation to be tested from here). Check on a real iPhone.
 - On a slow connection a module link (`#invoice-matching`) shows module 1 until the page's scripts load, then switches.
 
+## New products: Logistics Suite and Institute Management (27 Nov)
+
+Two products added to `src/content/seed/` (`logistics.ts`, `institute.ts`), each with 10 modules and a 3D scene for every step. Logistics comes in two editions, Fleet and Enterprise, shown on its page; the modules each edition includes are listed in the seed. The scenes gained trucks, phones and a location pin.
+
+Going live: push to `main`, then run `npm run cms:seed -- -- --ids product-logistics,product-institute`. That creates only the two new product documents; Source-to-Pay and MRP in Sanity are left as they are.
+
+To review:
+- Status says "Demo available" for both. Change it in Sanity if a demo can't be given yet.
+- The Logistics copy describes what the two demo apps do, in our own words. No other company's name, logo, customers or screens are used.
+- The Institute module list follows the list you gave, including Blogary as a module.
+
 ## When the domain is bought
 
 1. **Vercel.** Add the domain under Project → Settings → Domains and set the DNS records it shows. Then set `NEXT_PUBLIC_SITE_URL=https://yourdomain` (Production) and redeploy.

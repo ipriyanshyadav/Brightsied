@@ -79,6 +79,16 @@ export type ProductModule = {
   steps: ProductStep[];
 };
 
+/** A packaged way of buying a product: who it suits and which modules it includes. */
+export type ProductEdition = {
+  name: string;
+  /** One plain line on who it suits. */
+  bestFor: string;
+  summary: string;
+  /** Ids of the product's modules that come with this edition. */
+  modules: string[];
+};
+
 export type Product = {
   slug: string;
   name: string;
@@ -93,6 +103,8 @@ export type Product = {
   /** The end-to-end journey, shown for this product on the home page. */
   steps: ProductStep[];
   modules: ProductModule[];
+  /** Optional ways to buy it; empty when the product comes one way. */
+  editions: ProductEdition[];
   /** Illustrative app window; sample data, labelled as such on the page. */
   window: {
     path: string;

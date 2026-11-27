@@ -7,7 +7,7 @@ import { getProducts, getSettings } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Products",
-  description: "Brightseid Source-to-Pay and Brightseid MRP: buying and production planning software for growing manufacturers and distributors.",
+  description: "Brightseid Source-to-Pay, MRP, Logistics Suite and Institute Management: software for buying, production planning, transport and education.",
   alternates: { canonical: "/products" },
 };
 
@@ -18,7 +18,7 @@ export default async function ProductsPage() {
       <PageHero
         eyebrow="Products"
         title="Platforms we build and run ourselves."
-        intro="Our own products are where we prove what we sell: software that is secure, reliable and quick to use. Both are available for a guided demo."
+        intro="Our own products are where we prove what we sell: software that is secure, reliable and quick to use. Every one is available for a guided demo."
         tone="dark"
       />
       <section aria-label="All products" className="bg-ground px-4 py-24 sm:px-8 sm:py-32">

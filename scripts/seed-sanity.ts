@@ -7,6 +7,8 @@
 //   npm run cms:seed -- -- --dry   print the documents instead
 //   npm run cms:seed -- -- --only product,workItem
 //                                  write only documents of these types, leaving the rest as edited
+//   npm run cms:seed -- -- --ids product-logistics,product-institute
+//                                  write only these documents, e.g. a newly added product
 //
 // The second `--` matters: `sanity exec` rejects flags it doesn't know unless they follow `--`.
 
@@ -63,6 +65,7 @@ const docs: Doc[] = [
     features: keyed(p.features),
     steps: keyed(p.steps),
     modules: keyed(p.modules.map((m) => ({ ...m, steps: keyed(m.steps) }))),
+    editions: keyed(p.editions),
     window: { ...p.window, rows: keyed(p.window.rows) },
   })),
   ...work.map(({ caseStudy, ...w }, i) => ({
@@ -86,14 +89,28 @@ const docs: Doc[] = [
     .map((t, i) => ({ _id: `testimonial-${i}`, _type: "testimonial", order: i, ...t })),
 ];
 
+/** The comma-separated values after `flag`, or null when the flag isn't given. */
+function listArg(flag: string) {
+  const i = process.argv.indexOf(flag);
+  return i === -1 ? null : new Set((process.argv[i + 1] ?? "").split(",").filter(Boolean));
+}
+
 function selectedDocs() {
-  const i = process.argv.indexOf("--only");
-  if (i === -1) return docs;
-  const types = new Set((process.argv[i + 1] ?? "").split(",").filter(Boolean));
-  const known = new Set(docs.map((d) => d._type));
-  const unknown = [...types].filter((t) => !known.has(t));
-  if (types.size === 0 || unknown.length) throw new Error(`--only needs document types from: ${[...known].join(", ")}`);
-  return docs.filter((d) => types.has(d._type));
+  const types = listArg("--only");
+  const ids = listArg("--ids");
+  if (types && ids) throw new Error("Use --only or --ids, not both.");
+  if (types) {
+    const known = new Set(docs.map((d) => d._type));
+    const unknown = [...types].filter((t) => !known.has(t));
+    if (types.size === 0 || unknown.length) throw new Error(`--only needs document types from: ${[...known].join(", ")}`);
+    return docs.filter((d) => types.has(d._type));
+  }
+  if (ids) {
+    const unknown = [...ids].filter((id) => !docs.some((d) => d._id === id));
+    if (ids.size === 0 || unknown.length) throw new Error(`--ids got unknown document ids: ${unknown.join(", ") || "(none given)"}`);
+    return docs.filter((d) => ids.has(d._id));
+  }
+  return docs;
 }
 
 async function main() {

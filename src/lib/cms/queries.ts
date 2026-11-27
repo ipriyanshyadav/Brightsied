@@ -37,6 +37,7 @@ const product = `{
   ${list("audience")}, ${pairs("features")}, ${list("rules")},
   "steps": coalesce(steps[]${step}, []),
   "modules": coalesce(modules[]{ id, name, summary, "steps": coalesce(steps[]${step}, []) }, []),
+  "editions": coalesce(editions[]{ name, bestFor, summary, ${list("modules")} }, []),
   "window": window{ path, ${list("sidebar")}, activeItem, title, action, columns, "rows": coalesce(rows[]{ id, item, qty, state, tone }, []) }
 }`;
 export const productsQuery = `*[_type == "product"] | order(order asc) ${product}`;

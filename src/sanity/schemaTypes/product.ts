@@ -59,6 +59,24 @@ export const product = defineType({
       ],
     }),
     defineField({
+      name: "editions",
+      title: "Editions",
+      description: "Optional. Ways to buy the product, each with the modules it includes. Leave empty if it comes one way.",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "object",
+          fields: [
+            required("name", "Name"),
+            required("bestFor", "Best for", "string", { description: "One plain line on who it suits." }),
+            text("summary", "Summary"),
+            strings("modules", "Included modules", { description: "Anchor ids of the modules above, e.g. billing." }),
+          ],
+          preview: { select: { title: "name", subtitle: "bestFor" } },
+        }),
+      ],
+    }),
+    defineField({
       name: "window",
       title: "Illustrative app window",
       type: "object",
