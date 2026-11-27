@@ -25,6 +25,12 @@ The product pages now show 8 modules each, with a 3D scene for every step, and t
 1. Push the code to `main` (Vercel deploys it).
 2. Run `npm run cms:seed -- -- --only product,workItem,homePage`. This overwrites only the products, work items and home page in Sanity; site settings, services and packages are left alone. Those documents had no Studio edits on 27 Nov, so nothing is lost.
 
+Checks on the live site after release (27 Nov, headless Chrome):
+- Product pages, 3D scenes and module links work at 390, 768, 1024, 1280 and 1440 px wide, and with reduced motion (2D scenes).
+- Lighthouse (mobile): home 94, S2P 95, MRP 96 for performance; best practices and SEO 100; accessibility 96–97 (the heading-animation contrast quirk below).
+- Not tested: Safari and Firefox (Safari needs Develop → Allow Remote Automation to be tested from here). Check on a real iPhone.
+- On a slow connection a module link (`#invoice-matching`) shows module 1 until the page's scripts load, then switches.
+
 ## When the domain is bought
 
 1. **Vercel.** Add the domain under Project → Settings → Domains and set the DNS records it shows. Then set `NEXT_PUBLIC_SITE_URL=https://yourdomain` (Production) and redeploy.
