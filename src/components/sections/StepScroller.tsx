@@ -52,7 +52,7 @@ export function StepScroller({ steps, rules = [], headingLevel: Heading = "h3" }
               {step.title}
             </Heading>
             <p className={`mt-4 max-w-md transition-colors duration-500 ${active === i ? "text-ink/65" : "lg:text-ink/25"}`}>{step.body}</p>
-            <div className="card-soft mt-8 rounded-[24px] p-4 lg:hidden">
+            <div className="card-soft mt-8 w-full max-w-[520px] rounded-[24px] p-4 lg:hidden">
               <StepStage scenes={[step.scene]} active={0} />
             </div>
           </li>
